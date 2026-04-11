@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио</title>
+  <title>Anton Averianov</title>
   <style>
     * {
       margin: 0;
@@ -15,103 +15,280 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #0f0f0f;
       color: #f0f0f0;
-      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-end;
+      min-height: 100vh;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -1px;
-    }
-
-    header p {
-      margin-top: 0.75rem;
-      font-size: 1.2rem;
-      color: #888;
-    }
-
-    nav {
-      margin-top: 2rem;
+    .hero-top {
       display: flex;
-      gap: 2rem;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
     }
 
-    nav a {
+    .hero-top img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 1px solid #333;
+    }
+
+    .hero-top-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .hero-top-text p {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      color: #f0f0f0;
+      max-width: 640px;
+    }
+
+    .hero h2 span {
+      color: #555;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .hero-links a {
+      font-size: 0.9rem;
       color: #f0f0f0;
       text-decoration: none;
-      font-size: 1rem;
-      opacity: 0.7;
+      opacity: 0.4;
       transition: opacity 0.2s;
     }
 
-    nav a:hover {
+    .hero-links a:hover {
       opacity: 1;
     }
 
-    section {
-      max-width: 700px;
+    /* ── PROJECTS ── */
+    .projects {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .projects-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .project-item:nth-child(even) .project-media {
+      order: -1;
+    }
+
+    .project-media {
+      aspect-ratio: 4 / 3;
+      background: #161616;
+      border: 1px solid #1e1e1e;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .project-media img,
+    .project-media video {
       width: 100%;
-      padding: 3rem 2rem;
-      text-align: center;
+      height: 100%;
+      object-fit: cover;
     }
 
-    section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #ccc;
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
-    section p {
-      color: #777;
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-tags span {
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: #666;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 0.2rem 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .project-info h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .project-info p {
+      font-size: 0.9rem;
+      color: #666;
       line-height: 1.7;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 2rem;
-      color: #444;
+    .project-links {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .project-links a {
       font-size: 0.85rem;
+      color: #f0f0f0;
+      text-decoration: none;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .project-links a:hover {
+      opacity: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #2a2a2a;
+      font-size: 0.8rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .project-item {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .project-item:nth-child(even) .project-media {
+        order: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Привет, я [Имя]</h1>
-    <p>Разработчик · Дизайнер · Создатель</p>
-    <nav>
-      <a href="#about">Обо мне</a>
-      <a href="#projects">Проекты</a>
-      <a href="#contact">Контакты</a>
-    </nav>
-  </header>
-
-  <section id="about">
-    <h2>Обо мне</h2>
-    <p>Здесь будет краткое описание — кто ты, чем занимаешься и что тебя вдохновляет.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-top">
+      <img src="https://avatars.githubusercontent.com/u/106875633" alt="Anton Averianov">
+      <div class="hero-top-text">
+        <h1>Anton Averianov</h1>
+        <p>Software Engineer</p>
+      </div>
+    </div>
+    <h2>Building apps with <span>clean architecture</span> and real-world usability.</h2>
+    <div class="hero-links">
+      <a href="https://github.com/avedevios" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/ake11a/" target="_blank">LinkedIn</a>
+      <a href="https://t.me/gho5tw0lf" target="_blank">Telegram</a>
+      <a href="mailto:17ave11a@gmail.com">Email</a>
+    </div>
   </section>
 
-  <section id="projects">
-    <h2>Проекты</h2>
-    <p>Список твоих работ появится здесь. Можно добавить карточки с описанием и ссылками.</p>
-  </section>
+  <!-- PROJECTS -->
+  <div class="projects">
+    <p class="projects-label">Projects</p>
 
-  <section id="contact">
-    <h2>Контакты</h2>
-    <p>Email, GitHub, LinkedIn — всё что нужно для связи.</p>
-  </section>
+    <div class="project-item">
+      <div class="project-media">📱</div>
+      <div class="project-info">
+        <div class="project-tags">
+          <span>Swift</span>
+          <span>SwiftUI</span>
+          <span>Obj-C</span>
+          <span>MVVM</span>
+        </div>
+        <h3>calcuNator</h3>
+        <p>iOS calculator with basic arithmetic and trigonometric functions. SwiftUI + custom Objective-C framework via bridging header. Adaptive layout, haptic feedback, animated transitions, 52 unit tests.</p>
+        <div class="project-links">
+          <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-media">🍺</div>
+      <div class="project-info">
+        <div class="project-tags">
+          <span>Swift</span>
+          <span>UIKit</span>
+          <span>SnapKit</span>
+          <span>Realm</span>
+        </div>
+        <h3>HopSpot</h3>
+        <p>Beer catalogue app — browse, search and favourite beers. Paginated API via URLSession, local cache with RealmSwift for instant load. MVC with Dependency Injection, 22 unit tests.</p>
+        <div class="project-links">
+          <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-media">🃏</div>
+      <div class="project-info">
+        <div class="project-tags">
+          <span>Swift</span>
+          <span>SwiftUI</span>
+          <span>iPad</span>
+          <span>Face ID</span>
+        </div>
+        <h3>MemoPair</h3>
+        <p>Memory card matching game for iPad. Parental controls protected by Face ID / Touch ID, custom card editor with persistent storage, confetti animation, flip animations and sound feedback.</p>
+        <div class="project-links">
+          <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <footer>
-    <p>© 2026 [Имя]. Все права защищены.</p>
+    <p>© 2026 Anton Averianov</p>
   </footer>
 
 </body>
