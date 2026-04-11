@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anton Averianov</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
@@ -29,11 +32,11 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--l-bg, #fff);
       color: var(--l-text, #222);
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.7;
     }
 
     a {
@@ -311,6 +314,8 @@
       top: 0;
       height: 100vh;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar img {
@@ -321,22 +326,23 @@
     }
 
     .sidebar h1 {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 0.2rem;
     }
 
     .sidebar .role {
-      font-size: 0.8rem;
+      font-size: 0.95rem;
       color: #777;
       margin-bottom: 1.25rem;
     }
 
     .sidebar .bio {
-      font-size: 0.82rem;
+      font-size: 1.15rem;
       color: #555;
-      line-height: 1.6;
+      line-height: 1.5;
       margin-bottom: 1.5rem;
+      font-weight: 500;
     }
 
     .sidebar-links {
@@ -372,7 +378,7 @@
     /* ── MAIN ── */
     .main {
       flex: 1;
-      padding: 3rem 3rem 5rem;
+      padding: 1.5rem 3rem 5rem;
       max-width: 780px;
     }
 
@@ -399,10 +405,11 @@
     /* ── SECTIONS ── */
     .section {
       margin-bottom: 3.5rem;
+      scroll-margin-top: 1.5rem;
     }
 
     .section h2 {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 700;
       border-bottom: 2px solid #eee;
       padding-bottom: 0.4rem;
@@ -455,13 +462,13 @@
     }
 
     .project-entry h3 {
-      font-size: 1rem;
+      font-size: 1.15rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
 
     .project-entry p {
-      font-size: 0.83rem;
+      font-size: 0.95rem;
       color: #666;
       margin-bottom: 0.5rem;
     }
@@ -508,6 +515,45 @@
       padding: 0.25rem 0.65rem;
     }
 
+    /* ── SOCIAL ICONS IN SIDEBAR ── */
+    .sidebar-social {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.1rem;
+      margin-top: auto;
+      padding-top: 2rem;
+    }
+
+    .sidebar-social a {
+      font-size: 1.3rem;
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+      line-height: 1;
+    }
+
+    .sidebar-social a:hover {
+      transform: translateY(-3px);
+      text-decoration: none;
+      color: #222;
+    }
+
+    .sidebar-social-line {
+      width: 1px;
+      height: 70px;
+      background: #ddd;
+      margin-top: 0.25rem;
+    }
+
+    body.dark .sidebar-social a { color: #444; }
+    body.dark .sidebar-social a:hover { color: var(--accent, #4fc3f7); }
+    body.dark .sidebar-social-line { background: #2a2a2a; }
+
+    body:not(.dark)[class*="lt-"] .sidebar-social a { color: var(--l-text3); }
+    body:not(.dark)[class*="lt-"] .sidebar-social a:hover { color: var(--l-accent); }
+    body:not(.dark)[class*="lt-"] .sidebar-social-line { background: var(--l-border); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .layout { flex-direction: column; }
@@ -534,6 +580,9 @@
   <i id="theme-icon" class="fa-solid fa-sun"></i>
 </button>
 
+<!-- SOCIAL SIDEBAR -->
+
+
 <div class="layout">
 
   <!-- SIDEBAR -->
@@ -541,24 +590,19 @@
     <img src="https://avatars.githubusercontent.com/u/106875633" alt="Anton Averianov">
     <h1>Anton Averianov</h1>
     <p class="role">Software Engineer</p>
-    <p class="bio">iOS developer with a background in mobile, backend, and enterprise systems. Based in Winnipeg, Canada.</p>
-    <ul class="sidebar-links">
-      <li><span class="icon">📍</span> Winnipeg, Canada</li>
-      <li><span class="icon">✉️</span> <a href="mailto:17ave11a@gmail.com">17ave11a@gmail.com</a></li>
-      <li><span class="icon">🐙</span> <a href="https://github.com/avedevios" target="_blank">github.com/avedevios</a></li>
-      <li><span class="icon">💼</span> <a href="https://www.linkedin.com/in/ake11a/" target="_blank">LinkedIn</a></li>
-      <li><span class="icon">✈️</span> <a href="https://t.me/gho5tw0lf" target="_blank">Telegram</a></li>
-    </ul>
+    <p class="bio">I don't write code.<br>I make things move.</p>
+
+    <div class="sidebar-social">
+      <a href="https://github.com/avedevios" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/ake11a/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://t.me/gho5tw0lf" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      <a href="mailto:17ave11a@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      <div class="sidebar-social-line"></div>
+    </div>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
-
-    <nav class="topnav">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-    </nav>
 
     <!-- ABOUT -->
     <section class="section" id="about">
