@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anton Averianov</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -13,283 +14,467 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0f0f0f;
-      color: #f0f0f0;
+      background: #fff;
+      color: #222;
+      font-size: 15px;
+      line-height: 1.6;
+      transition: background 0.2s, color 0.2s;
     }
 
-    /* ── HERO ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-end;
-      min-height: 100vh;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .hero-top {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-top img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 1px solid #333;
-    }
-
-    .hero-top-text h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .hero-top-text p {
-      font-size: 1rem;
-      color: #555;
-      margin-top: 0.2rem;
-    }
-
-    .hero h2 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -1px;
-      color: #f0f0f0;
-      max-width: 640px;
-    }
-
-    .hero h2 span {
-      color: #555;
-    }
-
-    .hero-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-
-    .hero-links a {
-      font-size: 0.9rem;
-      color: #f0f0f0;
+    a {
+      color: #494e52;
       text-decoration: none;
-      opacity: 0.4;
-      transition: opacity 0.2s;
     }
 
-    .hero-links a:hover {
-      opacity: 1;
+    a:hover {
+      text-decoration: underline;
     }
 
-    /* ── PROJECTS ── */
-    .projects {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 2rem 6rem;
+    /* ── DARK THEME ── */
+    body.dark {
+      background: #0f0f0f;
+      color: #d0d0d0;
     }
 
-    .projects-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #333;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid #1a1a1a;
-    }
+    body.dark a { color: #aaa; }
+    body.dark a:hover { color: #fff; }
 
-    .project-item {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      padding: 3.5rem 0;
-      border-bottom: 1px solid #1a1a1a;
-    }
+    body.dark .sidebar { border-right-color: #222; }
+    body.dark .sidebar h1 { color: #f0f0f0; }
+    body.dark .sidebar .role { color: #555; }
+    body.dark .sidebar .bio { color: #666; }
+    body.dark .sidebar-links li { color: #666; }
+    body.dark .sidebar-links li a { color: #666; }
+    body.dark .sidebar-links li a:hover { color: #f0f0f0; }
+    body.dark .sidebar img { border-color: #333; }
 
-    .project-item:nth-child(even) .project-media {
-      order: -1;
-    }
+    body.dark .topnav { border-bottom-color: #222; }
+    body.dark .topnav a { color: #555; }
+    body.dark .topnav a:hover { color: #f0f0f0; }
 
-    .project-media {
-      aspect-ratio: 4 / 3;
-      background: #161616;
-      border: 1px solid #1e1e1e;
-      border-radius: 16px;
-      overflow: hidden;
+    body.dark .section h2 { border-bottom-color: #222; color: #f0f0f0; }
+    body.dark .section p { color: #888; }
+
+    body.dark .project-entry { border-bottom-color: #1a1a1a; }
+    body.dark .project-thumb { background: #161616; border-color: #222; }
+    body.dark .project-entry h3 { color: #f0f0f0; }
+    body.dark .project-entry p { color: #666; }
+    body.dark .project-entry a { color: #666; }
+    body.dark .project-entry a:hover { color: #f0f0f0; }
+    body.dark .project-tags span { background: #1a1a1a; color: #555; }
+
+    body.dark .skills-grid span { background: #161616; border-color: #222; color: #666; }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      z-index: 100;
+      padding: 0;
     }
 
-    .project-media img,
-    .project-media video {
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      border-color: #aaa;
+    }
+
+    .theme-toggle i {
+      font-size: 1rem;
+      color: #555;
+      transition: color 0.2s;
+    }
+
+    body.dark .theme-toggle {
+      background: #1a1a1a;
+      border-color: #333;
+    }
+
+    body.dark .theme-toggle i {
+      color: #aaa;
+    }
+
+    body.dark .theme-toggle:hover {
+      border-color: #666;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      padding: 2.5rem 1.5rem;
+      border-right: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar img {
+      width: 100%;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .sidebar .role {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 1.25rem;
+    }
+
+    .sidebar .bio {
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-links li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: #555;
+    }
+
+    .sidebar-links li a {
+      color: #555;
+    }
+
+    .sidebar-links li a:hover {
+      color: #222;
+      text-decoration: underline;
+    }
+
+    .sidebar-links .icon {
+      font-size: 1rem;
+      width: 18px;
+      text-align: center;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      padding: 3rem 3rem 5rem;
+      max-width: 780px;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+
+    .topnav a {
+      font-size: 0.85rem;
+      color: #777;
+      transition: color 0.2s;
+    }
+
+    .topnav a:hover {
+      color: #222;
+      text-decoration: none;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section p {
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── PROJECTS ── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .project-entry {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .project-entry:last-child {
+      border-bottom: none;
+    }
+
+    .project-thumb {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      background: #f5f5f5;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .project-thumb img,
+    .project-thumb video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 10px;
     }
 
-    .project-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .project-entry h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-entry p {
+      font-size: 0.83rem;
+      color: #666;
+      margin-bottom: 0.5rem;
     }
 
     .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
     .project-tags span {
       font-size: 0.68rem;
-      font-weight: 500;
-      color: #666;
-      background: #1a1a1a;
-      border-radius: 6px;
-      padding: 0.2rem 0.55rem;
+      color: #888;
+      background: #f0f0f0;
+      border-radius: 4px;
+      padding: 0.15rem 0.45rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
     }
 
-    .project-info h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .project-info p {
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.7;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1.25rem;
-      margin-top: 0.5rem;
-    }
-
-    .project-links a {
-      font-size: 0.85rem;
-      color: #f0f0f0;
-      text-decoration: none;
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-
-    .project-links a:hover {
-      opacity: 1;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #2a2a2a;
+    .project-entry a {
       font-size: 0.8rem;
-      border-top: 1px solid #1a1a1a;
+      color: #777;
+    }
+
+    .project-entry a:hover {
+      color: #222;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skills-grid span {
+      font-size: 0.8rem;
+      color: #555;
+      background: #f5f5f5;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: 0.25rem 0.65rem;
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .project-item {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    @media (max-width: 700px) {
+      .layout { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: flex-start;
       }
-
-      .project-item:nth-child(even) .project-media {
-        order: 0;
-      }
+      .sidebar img { width: 80px; }
+      .main { padding: 2rem 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-top">
-      <img src="https://avatars.githubusercontent.com/u/106875633" alt="Anton Averianov">
-      <div class="hero-top-text">
-        <h1>Anton Averianov</h1>
-        <p>Software Engineer</p>
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle theme">
+  <i id="theme-icon" class="fa-solid fa-sun"></i>
+</button>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <img src="https://avatars.githubusercontent.com/u/106875633" alt="Anton Averianov">
+    <h1>Anton Averianov</h1>
+    <p class="role">Software Engineer</p>
+    <p class="bio">iOS developer with a background in mobile, backend, and enterprise systems. Based in Winnipeg, Canada.</p>
+    <ul class="sidebar-links">
+      <li><span class="icon">📍</span> Winnipeg, Canada</li>
+      <li><span class="icon">✉️</span> <a href="mailto:17ave11a@gmail.com">17ave11a@gmail.com</a></li>
+      <li><span class="icon">🐙</span> <a href="https://github.com/avedevios" target="_blank">github.com/avedevios</a></li>
+      <li><span class="icon">💼</span> <a href="https://www.linkedin.com/in/ake11a/" target="_blank">LinkedIn</a></li>
+      <li><span class="icon">✈️</span> <a href="https://t.me/gho5tw0lf" target="_blank">Telegram</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <nav class="topnav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+    </nav>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <h2>About Me</h2>
+      <p>Software engineer with a background across mobile, backend, and enterprise systems. Currently focused on iOS development — building production-ready apps with clean architecture and real-world usability.</p>
+      <p>I've delivered production iOS apps end-to-end: features, refactoring, CI/CD, and App Store releases. Previously worked 10+ years in enterprise ERP systems across finance, logistics, and operations.</p>
+      <p>Open to iOS developer roles (junior / mid).</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+      <div class="project-list">
+
+        <div class="project-entry">
+          <div class="project-thumb">📱</div>
+          <div>
+            <h3>calcuNator</h3>
+            <div class="project-tags">
+              <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
+            </div>
+            <p>iOS calculator with basic arithmetic and trigonometric functions. Custom Objective-C framework via bridging header. Adaptive layout, haptic feedback, animated transitions, 52 unit tests.</p>
+            <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-thumb">🍺</div>
+          <div>
+            <h3>HopSpot</h3>
+            <div class="project-tags">
+              <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
+            </div>
+            <p>Beer catalogue app — browse, search and favourite beers. Paginated API via URLSession, local cache with RealmSwift for instant load. MVC with Dependency Injection, 22 unit tests.</p>
+            <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-thumb">🃏</div>
+          <div>
+            <h3>MemoPair</h3>
+            <div class="project-tags">
+              <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
+            </div>
+            <p>Memory card matching game for iPad. Parental controls via Face ID / Touch ID, custom card editor with persistent storage, confetti animation and sound feedback.</p>
+            <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
       </div>
-    </div>
-    <h2>Building apps with <span>clean architecture</span> and real-world usability.</h2>
-    <div class="hero-links">
-      <a href="https://github.com/avedevios" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/ake11a/" target="_blank">LinkedIn</a>
-      <a href="https://t.me/gho5tw0lf" target="_blank">Telegram</a>
-      <a href="mailto:17ave11a@gmail.com">Email</a>
-    </div>
-  </section>
+    </section>
 
-  <!-- PROJECTS -->
-  <div class="projects">
-    <p class="projects-label">Projects</p>
-
-    <div class="project-item">
-      <div class="project-media">📱</div>
-      <div class="project-info">
-        <div class="project-tags">
-          <span>Swift</span>
-          <span>SwiftUI</span>
-          <span>Obj-C</span>
-          <span>MVVM</span>
-        </div>
-        <h3>calcuNator</h3>
-        <p>iOS calculator with basic arithmetic and trigonometric functions. SwiftUI + custom Objective-C framework via bridging header. Adaptive layout, haptic feedback, animated transitions, 52 unit tests.</p>
-        <div class="project-links">
-          <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
-        </div>
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <h2>Tech Stack</h2>
+      <div class="skills-grid">
+        <span>Swift</span>
+        <span>Objective-C</span>
+        <span>UIKit</span>
+        <span>SwiftUI</span>
+        <span>RealmSwift</span>
+        <span>Core Data</span>
+        <span>URLSession</span>
+        <span>REST APIs</span>
+        <span>SnapKit</span>
+        <span>MVVM</span>
+        <span>MVC</span>
+        <span>Git / GitHub</span>
+        <span>CI/CD</span>
+        <span>Xcode</span>
+        <span>TestFlight</span>
+        <span>App Store Connect</span>
       </div>
-    </div>
+    </section>
 
-    <div class="project-item">
-      <div class="project-media">🍺</div>
-      <div class="project-info">
-        <div class="project-tags">
-          <span>Swift</span>
-          <span>UIKit</span>
-          <span>SnapKit</span>
-          <span>Realm</span>
-        </div>
-        <h3>HopSpot</h3>
-        <p>Beer catalogue app — browse, search and favourite beers. Paginated API via URLSession, local cache with RealmSwift for instant load. MVC with Dependency Injection, 22 unit tests.</p>
-        <div class="project-links">
-          <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
-        </div>
-      </div>
-    </div>
+  </main>
+</div>
 
-    <div class="project-item">
-      <div class="project-media">🃏</div>
-      <div class="project-info">
-        <div class="project-tags">
-          <span>Swift</span>
-          <span>SwiftUI</span>
-          <span>iPad</span>
-          <span>Face ID</span>
-        </div>
-        <h3>MemoPair</h3>
-        <p>Memory card matching game for iPad. Parental controls protected by Face ID / Touch ID, custom card editor with persistent storage, confetti animation, flip animations and sound feedback.</p>
-        <div class="project-links">
-          <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
-        </div>
-      </div>
-    </div>
+</body>
+</html>
 
-  </div>
+<script>
+  const icon = document.getElementById('theme-icon');
 
-  <footer>
-    <p>© 2026 Anton Averianov</p>
-  </footer>
+  function applyTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    icon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+  }
 
+  // всегда берём системную настройку
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  applyTheme(prefersDark.matches);
+
+  // следим за изменением в реальном времени
+  prefersDark.addEventListener('change', e => applyTheme(e.matches));
+
+  function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark');
+    icon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+  }
+</script>
 </body>
 </html>
