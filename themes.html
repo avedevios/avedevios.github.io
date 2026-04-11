@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Picker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #111;
+      color: #f0f0f0;
+      padding: 3rem 2rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 3rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .theme-card {
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* ── PREVIEW MINI-LAYOUT ── */
+    .preview {
+      padding: 1.25rem;
+      height: 200px;
+      display: flex;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+
+    .preview-sidebar {
+      width: 70px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .preview-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-bottom: 0.3rem;
+    }
+
+    .preview-name {
+      height: 6px;
+      border-radius: 3px;
+      width: 80%;
+    }
+
+    .preview-role {
+      height: 4px;
+      border-radius: 2px;
+      width: 60%;
+      opacity: 0.5;
+    }
+
+    .preview-link {
+      height: 4px;
+      border-radius: 2px;
+      width: 90%;
+      margin-top: 0.2rem;
+      opacity: 0.3;
+    }
+
+    .preview-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .preview-nav {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .preview-nav-item {
+      height: 4px;
+      width: 24px;
+      border-radius: 2px;
+      opacity: 0.4;
+    }
+
+    .preview-heading {
+      height: 8px;
+      border-radius: 4px;
+      width: 70%;
+    }
+
+    .preview-text {
+      height: 4px;
+      border-radius: 2px;
+      opacity: 0.4;
+    }
+
+    .preview-text.w100 { width: 100%; }
+    .preview-text.w80  { width: 80%; }
+    .preview-text.w90  { width: 90%; }
+
+    .preview-card {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      align-items: center;
+    }
+
+    .preview-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .preview-card-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+    }
+
+    .preview-card-title {
+      height: 5px;
+      border-radius: 2px;
+      width: 60%;
+    }
+
+    .preview-card-text {
+      height: 3px;
+      border-radius: 2px;
+      width: 90%;
+      opacity: 0.4;
+    }
+
+    /* ── LABEL ── */
+    .theme-label {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .theme-label span {
+      font-size: 0.75rem;
+      opacity: 0.5;
+      font-weight: 400;
+    }
+
+    /* ══════════════════════════════
+       THEMES
+    ══════════════════════════════ */
+
+    /* 1. Cyberpunk */
+    .t-cyberpunk .preview        { background: #0a0a0f; }
+    .t-cyberpunk .preview-avatar { background: #b44fff; }
+    .t-cyberpunk .preview-name   { background: #b44fff; }
+    .t-cyberpunk .preview-role   { background: #00fff0; }
+    .t-cyberpunk .preview-link   { background: #00fff0; }
+    .t-cyberpunk .preview-nav-item   { background: #b44fff; }
+    .t-cyberpunk .preview-heading    { background: #b44fff; box-shadow: 0 0 8px #b44fff88; }
+    .t-cyberpunk .preview-text       { background: #00fff0; }
+    .t-cyberpunk .preview-thumb      { background: #1a0a2e; border: 1px solid #b44fff; }
+    .t-cyberpunk .preview-card-title { background: #00fff0; }
+    .t-cyberpunk .preview-card-text  { background: #b44fff; }
+    .t-cyberpunk .theme-label    { background: #0a0a0f; color: #b44fff; border-top: 1px solid #1a0a2e; }
+    .t-cyberpunk { border-color: #b44fff44; }
+    .t-cyberpunk:hover { border-color: #b44fff; }
+
+    /* 2. Matrix */
+    .t-matrix .preview        { background: #050f05; }
+    .t-matrix .preview-avatar { background: #00ff41; }
+    .t-matrix .preview-name   { background: #00ff41; }
+    .t-matrix .preview-role   { background: #39ff14; }
+    .t-matrix .preview-link   { background: #39ff14; }
+    .t-matrix .preview-nav-item   { background: #00ff41; }
+    .t-matrix .preview-heading    { background: #00ff41; box-shadow: 0 0 8px #00ff4188; }
+    .t-matrix .preview-text       { background: #39ff14; }
+    .t-matrix .preview-thumb      { background: #0a1f0a; border: 1px solid #00ff41; }
+    .t-matrix .preview-card-title { background: #39ff14; }
+    .t-matrix .preview-card-text  { background: #00ff41; }
+    .t-matrix .theme-label    { background: #050f05; color: #00ff41; border-top: 1px solid #0a1f0a; }
+    .t-matrix { border-color: #00ff4144; }
+    .t-matrix:hover { border-color: #00ff41; }
+
+    /* 3. Synthwave */
+    .t-synthwave .preview        { background: #120024; }
+    .t-synthwave .preview-avatar { background: #ff2d78; }
+    .t-synthwave .preview-name   { background: #ff2d78; }
+    .t-synthwave .preview-role   { background: #ff9de2; }
+    .t-synthwave .preview-link   { background: #ff9de2; }
+    .t-synthwave .preview-nav-item   { background: #ff2d78; }
+    .t-synthwave .preview-heading    { background: #ff2d78; box-shadow: 0 0 8px #ff2d7888; }
+    .t-synthwave .preview-text       { background: #ff9de2; }
+    .t-synthwave .preview-thumb      { background: #1e0035; border: 1px solid #ff2d78; }
+    .t-synthwave .preview-card-title { background: #ff9de2; }
+    .t-synthwave .preview-card-text  { background: #ff2d78; }
+    .t-synthwave .theme-label    { background: #120024; color: #ff2d78; border-top: 1px solid #1e0035; }
+    .t-synthwave { border-color: #ff2d7844; }
+    .t-synthwave:hover { border-color: #ff2d78; }
+
+    /* 4. Soft Neon */
+    .t-softneon .preview        { background: #0f0f1a; }
+    .t-softneon .preview-avatar { background: #4fc3f7; }
+    .t-softneon .preview-name   { background: #4fc3f7; }
+    .t-softneon .preview-role   { background: #c084fc; }
+    .t-softneon .preview-link   { background: #c084fc; }
+    .t-softneon .preview-nav-item   { background: #4fc3f7; }
+    .t-softneon .preview-heading    { background: #4fc3f7; box-shadow: 0 0 8px #4fc3f788; }
+    .t-softneon .preview-text       { background: #c084fc; }
+    .t-softneon .preview-thumb      { background: #1a1a2e; border: 1px solid #4fc3f7; }
+    .t-softneon .preview-card-title { background: #c084fc; }
+    .t-softneon .preview-card-text  { background: #4fc3f7; }
+    .t-softneon .theme-label    { background: #0f0f1a; color: #4fc3f7; border-top: 1px solid #1a1a2e; }
+    .t-softneon { border-color: #4fc3f744; }
+    .t-softneon:hover { border-color: #4fc3f7; }
+
+    /* 5. Amber */
+    .t-amber .preview        { background: #0d0800; }
+    .t-amber .preview-avatar { background: #ffb300; }
+    .t-amber .preview-name   { background: #ffb300; }
+    .t-amber .preview-role   { background: #ff6b00; }
+    .t-amber .preview-link   { background: #ff6b00; }
+    .t-amber .preview-nav-item   { background: #ffb300; }
+    .t-amber .preview-heading    { background: #ffb300; box-shadow: 0 0 8px #ffb30088; }
+    .t-amber .preview-text       { background: #ff6b00; }
+    .t-amber .preview-thumb      { background: #1a1000; border: 1px solid #ffb300; }
+    .t-amber .preview-card-title { background: #ff6b00; }
+    .t-amber .preview-card-text  { background: #ffb300; }
+    .t-amber .theme-label    { background: #0d0800; color: #ffb300; border-top: 1px solid #1a1000; }
+    .t-amber { border-color: #ffb30044; }
+    .t-amber:hover { border-color: #ffb300; }
+
+    .back {
+      display: inline-block;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #555;
+      text-decoration: none;
+    }
+    .back:hover { color: #f0f0f0; }
+  </style>
+</head>
+<body>
+
+  <h1>Theme Picker</h1>
+  <p class="subtitle">Click a theme to preview it on the main page</p>
+
+  <div class="grid">
+
+    <div class="theme-card t-cyberpunk" onclick="applyTheme('cyberpunk')">
+      <div class="preview">
+        <div class="preview-sidebar">
+          <div class="preview-avatar"></div>
+          <div class="preview-name"></div>
+          <div class="preview-role"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-nav">
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+          </div>
+          <div class="preview-heading"></div>
+          <div class="preview-text w100"></div>
+          <div class="preview-text w80"></div>
+          <div class="preview-text w90"></div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="theme-label">Cyberpunk <span>#b44fff · #00fff0</span></div>
+    </div>
+
+    <div class="theme-card t-matrix" onclick="applyTheme('matrix')">
+      <div class="preview">
+        <div class="preview-sidebar">
+          <div class="preview-avatar"></div>
+          <div class="preview-name"></div>
+          <div class="preview-role"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-nav">
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+          </div>
+          <div class="preview-heading"></div>
+          <div class="preview-text w100"></div>
+          <div class="preview-text w80"></div>
+          <div class="preview-text w90"></div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="theme-label">Matrix <span>#00ff41 · #39ff14</span></div>
+    </div>
+
+    <div class="theme-card t-synthwave" onclick="applyTheme('synthwave')">
+      <div class="preview">
+        <div class="preview-sidebar">
+          <div class="preview-avatar"></div>
+          <div class="preview-name"></div>
+          <div class="preview-role"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-nav">
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+          </div>
+          <div class="preview-heading"></div>
+          <div class="preview-text w100"></div>
+          <div class="preview-text w80"></div>
+          <div class="preview-text w90"></div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="theme-label">Synthwave <span>#ff2d78 · #ff9de2</span></div>
+    </div>
+
+    <div class="theme-card t-softneon" onclick="applyTheme('softneon')">
+      <div class="preview">
+        <div class="preview-sidebar">
+          <div class="preview-avatar"></div>
+          <div class="preview-name"></div>
+          <div class="preview-role"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-nav">
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+          </div>
+          <div class="preview-heading"></div>
+          <div class="preview-text w100"></div>
+          <div class="preview-text w80"></div>
+          <div class="preview-text w90"></div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="theme-label">Soft Neon <span>#4fc3f7 · #c084fc</span></div>
+    </div>
+
+    <div class="theme-card t-amber" onclick="applyTheme('amber')">
+      <div class="preview">
+        <div class="preview-sidebar">
+          <div class="preview-avatar"></div>
+          <div class="preview-name"></div>
+          <div class="preview-role"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+          <div class="preview-link"></div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-nav">
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+            <div class="preview-nav-item"></div>
+          </div>
+          <div class="preview-heading"></div>
+          <div class="preview-text w100"></div>
+          <div class="preview-text w80"></div>
+          <div class="preview-text w90"></div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-thumb"></div>
+            <div class="preview-card-lines">
+              <div class="preview-card-title"></div>
+              <div class="preview-card-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="theme-label">Amber <span>#ffb300 · #ff6b00</span></div>
+    </div>
+
+  </div>
+
+  <a class="back" href="index.html">← back to portfolio</a>
+
+  <script>
+    function applyTheme(name) {
+      localStorage.setItem('neon-theme', name);
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
