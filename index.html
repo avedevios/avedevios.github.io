@@ -6,7 +6,7 @@
   <title>Anton Averianov</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
@@ -32,7 +32,7 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--l-bg, #fff);
       color: var(--l-text, #222);
       font-size: 17px;
@@ -421,6 +421,67 @@
       margin-bottom: 0.75rem;
     }
 
+    /* ── EXPERIENCE ── */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .experience-item {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .experience-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .experience-header h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .experience-date {
+      font-size: 0.8rem;
+      color: #aaa;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .experience-company {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-item > p:last-child {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    body.dark .experience-item { border-bottom-color: var(--border); }
+    body.dark .experience-header h3 { color: var(--accent); }
+    body.dark .experience-date { color: var(--text4); }
+    body.dark .experience-company { color: var(--text4); }
+    body.dark .experience-item > p:last-child { color: var(--text3); }
+
+    body:not(.dark)[class*="lt-"] .experience-item { border-bottom-color: var(--l-border); }
+    body:not(.dark)[class*="lt-"] .experience-header h3 { color: var(--l-text); }
+    body:not(.dark)[class*="lt-"] .experience-date { color: var(--l-text3); }
+    body:not(.dark)[class*="lt-"] .experience-company { color: var(--l-text3); }
+    body:not(.dark)[class*="lt-"] .experience-item > p:last-child { color: var(--l-text2); }
+
     /* ── PROJECTS ── */
     .project-list {
       display: flex;
@@ -526,7 +587,7 @@
     }
 
     .sidebar-social a {
-      font-size: 1.3rem;
+      font-size: 2rem;
       color: #aaa;
       text-decoration: none;
       transition: color 0.2s, transform 0.2s;
@@ -541,7 +602,7 @@
 
     .sidebar-social-line {
       width: 1px;
-      height: 70px;
+      height: 100px;
       background: #ddd;
       margin-top: 0.25rem;
     }
@@ -607,9 +668,42 @@
     <!-- ABOUT -->
     <section class="section" id="about">
       <h2>About Me</h2>
-      <p>Software engineer with a background across mobile, backend, and enterprise systems. Currently focused on iOS development — building production-ready apps with clean architecture and real-world usability.</p>
-      <p>I've delivered production iOS apps end-to-end: features, refactoring, CI/CD, and App Store releases. Previously worked 10+ years in enterprise ERP systems across finance, logistics, and operations.</p>
-      <p>Open to iOS developer roles (junior / mid).</p>
+      <p>Over a decade turning complex problems into working software. Started in enterprise ERP systems — finance, logistics, operations — then moved into mobile. Now I build apps end-to-end: architecture, features, CI/CD, App Store releases.</p>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <h2>Experience</h2>
+      <div class="experience-list">
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <h3>Software Engineer</h3>
+            <span class="experience-date">2025 — Present</span>
+          </div>
+          <p class="experience-company">Digital Factory</p>
+          <p>End-to-end iOS delivery: features, UI/UX, legacy Objective-C refactoring. App Store Connect, TestFlight, production releases. CI/CD pipelines, Git workflows, code reviews. Ruby on Rails backend contributions, REST API integrations.</p>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <h3>Independent Software Engineer</h3>
+            <span class="experience-date">2022 — Present</span>
+          </div>
+          <p class="experience-company">Freelance</p>
+          <p>Native iOS MVP for a commercial client — product catalog, location-based dealer discovery. AI-powered chatbot for a corporate website (Python, NLP, REST APIs). ML solution for geospatial classification (NumPy, Pandas, scikit-learn). 300+ hours iOS training, 50+ hands-on projects.</p>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <h3>Enterprise Systems Developer</h3>
+            <span class="experience-date">2011 — 2022</span>
+          </div>
+          <p class="experience-company">PJSC TransContainer · ACIG Group · VODOVOZ</p>
+          <p>10 years delivering ERP and business applications across finance, logistics, and operations. ERP migrations, custom modules, process automation, financial reporting (IFRS). Complex SQL (MS SQL Server, PostgreSQL, Oracle), data integrity, incident response.</p>
+        </div>
+
+      </div>
     </section>
 
     <!-- PROJECTS -->
