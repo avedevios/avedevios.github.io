@@ -17,6 +17,15 @@
       transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
     }
 
+    pre, code, pre *, code * {
+      transition: none;
+    }
+
+    /* явные цвета для code в светлой теме */
+    code { background: #f5f5f5; color: #333; }
+    pre  { background: #f5f5f5; color: #333; }
+    pre code { background: none; color: inherit; }
+
     /* отключаем дефолтный fade у View Transitions */
     ::view-transition-old(root),
     ::view-transition-new(root) {
@@ -776,6 +785,23 @@
     body:not(.dark)[class*="lt-"] .project-readme pre,
     body:not(.dark)[class*="lt-"] .project-readme code { background: var(--l-bg2); }
 
+    /* ── SCREENSHOTS GRID ── */
+    .project-screenshots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    .project-screenshots img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    body.dark .project-screenshots img { border-color: var(--border); }
+    body:not(.dark)[class*="lt-"] .project-screenshots img { border-color: var(--l-border); }
+
     /* ── SKILLS ── */
     .skills-grid {
       display: flex;
@@ -903,7 +929,9 @@
       <div class="project-list">
 
         <div class="project-entry" id="project-calculnator">
-          <div class="project-thumb"><img src="assets/images/calculnator-preview.png" alt="calcuNator preview"></div>
+          <div class="project-screenshots">
+            <img src="assets/images/calculnator/calculnator-1.png" alt="calcuNator preview">
+          </div>
           <h3>calcuNator</h3>
           <div class="project-tags">
             <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
@@ -914,7 +942,10 @@
         </div>
 
         <div class="project-entry" id="project-memopair">
-          <div class="project-thumb"><img src="assets/images/memopair-preview.png" alt="MemoPair preview"></div>
+          <div class="project-screenshots">
+            <img src="assets/images/memopair/memopair-1.png" alt="MemoPair screen 1">
+            <img src="assets/images/memopair/memopair-2.png" alt="MemoPair screen 2">
+          </div>
           <h3>MemoPair</h3>
           <div class="project-tags">
             <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
@@ -925,7 +956,11 @@
         </div>
 
         <div class="project-entry" id="project-hopspot">
-          <div class="project-thumb"><img src="assets/images/hopspot-preview.png" alt="HopSpot preview"></div>
+          <div class="project-screenshots">
+            <img src="assets/images/hopspot/hopspot-1.png" alt="HopSpot screen 1">
+            <img src="assets/images/hopspot/hopspot-2.png" alt="HopSpot screen 2">
+            <img src="assets/images/hopspot/hopspot-3.png" alt="HopSpot screen 3">
+          </div>
           <h3>HopSpot</h3>
           <div class="project-tags">
             <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
@@ -1002,6 +1037,30 @@
     .catch(() => {
       document.getElementById('about-content').innerHTML = '<p>Over a decade turning complex problems into working software. Started in enterprise ERP systems — finance, logistics, operations — then moved into mobile. Now I build apps end-to-end: architecture, features, CI/CD, App Store releases.</p>';
     });
+
+  // слайдер
+  const sliderState = {};
+
+  function slideProject(id, dir) {
+    const track = document.querySelector(`#slider-${id} .slider-track`);
+    const total = track.children.length;
+    if (!sliderState[id]) sliderState[id] = 0;
+    sliderState[id] = (sliderState[id] + dir + total) % total;
+    updateSlider(id);
+  }
+
+  function goToSlide(id, index) {
+    sliderState[id] = index;
+    updateSlider(id);
+  }
+
+  function updateSlider(id) {
+    const track = document.querySelector(`#slider-${id} .slider-track`);
+    track.style.transform = `translateX(-${sliderState[id] * 100}%)`;
+    document.querySelectorAll(`#dots-${id} .dot`).forEach((dot, i) => {
+      dot.classList.toggle('active', i === sliderState[id]);
+    });
+  }
 
   const icon = document.getElementById('theme-icon');
 
