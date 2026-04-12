@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -421,6 +422,65 @@
       margin-bottom: 0.75rem;
     }
 
+    /* ── MARKDOWN CONTENT ── */
+    #about-content h1,
+    #about-content h2,
+    #about-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.3rem;
+    }
+
+    #about-content h1 { display: none; } /* скрываем # заголовок */
+
+    #about-content p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    #about-content ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    #about-content li {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    #about-content code {
+      font-size: 0.82rem;
+      background: #f5f5f5;
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+    }
+
+    #about-content a {
+      color: #555;
+      text-decoration: underline;
+    }
+
+    #about-content hr { border: none; border-top: 1px solid #eee; margin: 1rem 0; }
+
+    body.dark #about-content h2,
+    body.dark #about-content h3 { color: var(--accent); border-bottom-color: var(--border); }
+    body.dark #about-content p,
+    body.dark #about-content li { color: var(--text3); }
+    body.dark #about-content code { background: var(--bg2); color: var(--accent2); }
+    body.dark #about-content hr { border-top-color: var(--border); }
+
+    body:not(.dark)[class*="lt-"] #about-content h2,
+    body:not(.dark)[class*="lt-"] #about-content h3 { color: var(--l-text); border-bottom-color: var(--l-border); }
+    body:not(.dark)[class*="lt-"] #about-content p,
+    body:not(.dark)[class*="lt-"] #about-content li { color: var(--l-text2); }
+    body:not(.dark)[class*="lt-"] #about-content code { background: var(--l-bg2); }
+
     /* ── EXPERIENCE ── */
     .experience-list {
       display: flex;
@@ -707,43 +767,11 @@
     <!-- ABOUT -->
     <section class="section" id="about">
       <h2>About Me</h2>
-      <p>Over a decade turning complex problems into working software. Started in enterprise ERP systems — finance, logistics, operations — then moved into mobile. Now I build apps end-to-end: architecture, features, CI/CD, App Store releases.</p>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="section" id="experience">
-      <h2>Experience</h2>
-      <div class="experience-list">
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3>Software Engineer</h3>
-            <span class="experience-date">2025 — Present</span>
-          </div>
-          <p class="experience-company">Digital Factory</p>
-          <p>End-to-end iOS delivery: features, UI/UX, legacy Objective-C refactoring. App Store Connect, TestFlight, production releases. CI/CD pipelines, Git workflows, code reviews. Ruby on Rails backend contributions, REST API integrations.</p>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3>Independent Software Engineer</h3>
-            <span class="experience-date">2022 — Present</span>
-          </div>
-          <p class="experience-company">Freelance</p>
-          <p>Native iOS MVP for a commercial client — product catalog, location-based dealer discovery. AI-powered chatbot for a corporate website (Python, NLP, REST APIs). ML solution for geospatial classification (NumPy, Pandas, scikit-learn). 300+ hours iOS training, 50+ hands-on projects.</p>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3>Enterprise Systems Developer</h3>
-            <span class="experience-date">2011 — 2022</span>
-          </div>
-          <p class="experience-company">PJSC TransContainer · ACIG Group · VODOVOZ</p>
-          <p>10 years delivering ERP and business applications across finance, logistics, and operations. ERP migrations, custom modules, process automation, financial reporting (IFRS). Complex SQL (MS SQL Server, PostgreSQL, Oracle), data integrity, incident response.</p>
-        </div>
-
+      <div id="about-content">
+        <p style="color:#aaa;font-size:0.9rem">Loading...</p>
       </div>
     </section>
+
 
     <!-- PROJECTS -->
     <section class="section" id="projects">
@@ -867,6 +895,16 @@
 </html>
 
 <script>
+  // загружаем About Me из README профиля
+  fetch('https://raw.githubusercontent.com/avedevios/avedevios/main/README.md')
+    .then(r => r.text())
+    .then(md => {
+      document.getElementById('about-content').innerHTML = marked.parse(md);
+    })
+    .catch(() => {
+      document.getElementById('about-content').innerHTML = '<p>Over a decade turning complex problems into working software. Started in enterprise ERP systems — finance, logistics, operations — then moved into mobile. Now I build apps end-to-end: architecture, features, CI/CD, App Store releases.</p>';
+    });
+
   const icon = document.getElementById('theme-icon');
 
   const neonThemes = ['cyberpunk', 'matrix', 'synthwave', 'softneon', 'amber'];
