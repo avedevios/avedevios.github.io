@@ -491,9 +491,9 @@
 
     .project-entry {
       display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
-      padding-bottom: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      padding-bottom: 2.5rem;
       border-bottom: 1px solid #f0f0f0;
     }
 
@@ -502,16 +502,16 @@
     }
 
     .project-thumb {
-      width: 80px;
-      height: 80px;
-      flex-shrink: 0;
+      width: 100%;
+      aspect-ratio: 16 / 9;
       background: #f5f5f5;
       border: 1px solid #eee;
-      border-radius: 10px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 4rem;
+      overflow: hidden;
     }
 
     .project-thumb img,
@@ -519,11 +519,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 14px;
     }
 
     .project-entry h3 {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
@@ -552,7 +552,7 @@
     }
 
     .project-entry a {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #777;
     }
 
@@ -712,39 +712,33 @@
       <div class="project-list">
 
         <div class="project-entry">
-          <div class="project-thumb">📱</div>
-          <div>
-            <h3>calcuNator</h3>
-            <div class="project-tags">
-              <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
-            </div>
-            <p>iOS calculator with basic arithmetic and trigonometric functions. Custom Objective-C framework via bridging header. Adaptive layout, haptic feedback, animated transitions, 52 unit tests.</p>
-            <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
+          <div class="project-thumb"><img src="assets/images/calculnator-preview.png" alt="calcuNator preview"></div>
+          <h3>calcuNator</h3>
+          <div class="project-tags">
+            <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
           </div>
+          <p>iOS calculator with basic arithmetic and trigonometric functions. Custom Objective-C framework via bridging header. Adaptive layout, haptic feedback, animated transitions, 52 unit tests.</p>
+          <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
         </div>
 
         <div class="project-entry">
-          <div class="project-thumb">🍺</div>
-          <div>
-            <h3>HopSpot</h3>
-            <div class="project-tags">
-              <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
-            </div>
-            <p>Beer catalogue app — browse, search and favourite beers. Paginated API via URLSession, local cache with RealmSwift for instant load. MVC with Dependency Injection, 22 unit tests.</p>
-            <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
+          <div class="project-thumb"><img src="assets/images/memopair-preview.png" alt="MemoPair preview"></div>
+          <h3>MemoPair</h3>
+          <div class="project-tags">
+            <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
           </div>
+          <p>Memory card matching game for iPad. Parental controls via Face ID / Touch ID, custom card editor with persistent storage, confetti animation and sound feedback.</p>
+          <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
         </div>
 
         <div class="project-entry">
-          <div class="project-thumb">🃏</div>
-          <div>
-            <h3>MemoPair</h3>
-            <div class="project-tags">
-              <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
-            </div>
-            <p>Memory card matching game for iPad. Parental controls via Face ID / Touch ID, custom card editor with persistent storage, confetti animation and sound feedback.</p>
-            <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
+          <div class="project-thumb"><img src="assets/images/hopspot-preview.png" alt="HopSpot preview"></div>
+          <h3>HopSpot</h3>
+          <div class="project-tags">
+            <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
           </div>
+          <p>Beer catalogue app — browse, search and favourite beers. Paginated API via URLSession, local cache with RealmSwift for instant load. MVC with Dependency Injection, 22 unit tests.</p>
+          <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
         </div>
 
       </div>
@@ -804,9 +798,8 @@
     icon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
   }
 
-  // применяем неоновую тему если выбрана, иначе softneon по умолчанию
-  const savedNeon = localStorage.getItem('neon-theme') || 'softneon';
-  applyNeonTheme(savedNeon);
+  // применяем неоновую тему — всегда softneon, без localStorage
+  applyNeonTheme('softneon');
 
   // применяем светлую тему если выбрана, иначе paper по умолчанию
   const savedLight = localStorage.getItem('light-theme') || 'paper';
