@@ -858,21 +858,78 @@
     body:not(.dark)[class*="lt-"] .sidebar-social-line { background: var(--l-border); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
+
+      /* layout */
       .layout { flex-direction: column; }
+
+      /* sidebar — компактная шапка */
       .sidebar {
         width: 100%;
         position: static;
         height: auto;
         border-right: none;
         border-bottom: 1px solid #eee;
+        padding: 1.25rem 1.25rem 1rem;
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
         gap: 1rem;
-        align-items: flex-start;
+        overflow: visible;
       }
-      .sidebar img { width: 80px; }
-      .main { padding: 2rem 1.25rem; }
+
+      .sidebar img {
+        width: 64px;
+        height: 64px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+
+      .sidebar-text {
+        flex: 1;
+      }
+
+      .sidebar h1 { font-size: 1.1rem; }
+      .sidebar .role { font-size: 0.8rem; margin-bottom: 0; }
+      .sidebar .bio { display: none; }
+
+      /* иконки в сайдбаре — горизонтально */
+      .sidebar-social {
+        flex-direction: row;
+        margin-top: 0;
+        padding-top: 0;
+        gap: 0.9rem;
+      }
+
+      .sidebar-social-line { display: none; }
+
+      /* main */
+      .main {
+        padding: 1.25rem 1rem 4rem;
+        max-width: 100%;
+      }
+
+      /* top bar — скрываем nav, оставляем только кнопку */
+      .fixed-nav { display: none; }
+
+      .top-bar {
+        top: 0.75rem;
+        right: 0.75rem;
+      }
+
+      /* скриншоты — 1 в ряд на очень маленьких, 2 на средних */
+      .project-screenshots {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* секции */
+      .section { padding: 2rem 0; }
+    }
+
+    @media (max-width: 480px) {
+      .project-screenshots {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -898,8 +955,10 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <img src="assets/images/profile-photo.png" alt="Anton Averianov">
+    <div class="sidebar-text">
     <h1>Anton Averianov</h1>
     <p class="role">Software Engineer</p>
+    </div>
     <p class="bio">I don't write code.<br>I make things move.</p>
 
     <div class="sidebar-social">
