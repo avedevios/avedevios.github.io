@@ -560,6 +560,45 @@
       color: #222;
     }
 
+    /* ── PROJECT DETAILS ── */
+    .project-summary {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    body.dark .project-summary { color: var(--text2); }
+    body:not(.dark)[class*="lt-"] .project-summary { color: var(--l-text2); }
+    .project-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #aaa;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-top: 0.1rem;
+    }
+
+    body.dark .detail-label { color: var(--accent2); }
+    body.dark .project-detail-row { color: var(--text3); }
+    body:not(.dark)[class*="lt-"] .detail-label { color: var(--l-text3); }
+    body:not(.dark)[class*="lt-"] .project-detail-row { color: var(--l-text2); }
+
     /* ── SKILLS ── */
     .skills-grid {
       display: flex;
@@ -717,7 +756,25 @@
           <div class="project-tags">
             <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
           </div>
-          <p>iOS calculator with basic arithmetic and trigonometric functions. Custom Objective-C framework via bridging header. Adaptive layout, haptic feedback, animated transitions, 52 unit tests.</p>
+          <p class="project-summary">iOS calculator app built with SwiftUI and a custom Objective-C framework. MVVM architecture with unit tests. Test assignment for DGTL Factory.</p>
+          <div class="project-details">
+            <div class="project-detail-row">
+              <span class="detail-label">Architecture</span>
+              <span>MVVM — CalcButton → CalculatorState → CalculatorEngine → ViewModel → View. Engine has zero SwiftUI dependencies.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">ObjC Bridge</span>
+              <span>Core arithmetic powered by a custom Objective-C framework integrated via bridging header.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Features</span>
+              <span>Arithmetic + trig (sin, cos, tan in degrees), operator replacement, division by zero handling, adaptive layout, haptic feedback, animated transitions.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Tests</span>
+              <span>52 unit tests — arithmetic, edge cases, trig, formatting, ViewModel logic.</span>
+            </div>
+          </div>
           <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
         </div>
 
@@ -727,7 +784,21 @@
           <div class="project-tags">
             <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
           </div>
-          <p>Memory card matching game for iPad. Parental controls via Face ID / Touch ID, custom card editor with persistent storage, confetti animation and sound feedback.</p>
+          <p class="project-summary">A memory card matching game for iPad with parental controls and a custom card editor. Built for kids, designed for parents.</p>
+          <div class="project-details">
+            <div class="project-detail-row">
+              <span class="detail-label">Architecture</span>
+              <span>MVC with dedicated service layers — GameEngine, CardManager, AuthenticationManager, KeychainManager.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Security</span>
+              <span>Parent Mode protected by Face ID / Touch ID with password fallback. Password stored in Keychain.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Features</span>
+              <span>4×4 grid, flip animations, move counter and timer, confetti on win, sound feedback, card editor with UserDefaults persistence.</span>
+            </div>
+          </div>
           <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
         </div>
 
@@ -737,7 +808,29 @@
           <div class="project-tags">
             <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
           </div>
-          <p>Beer catalogue app — browse, search and favourite beers. Paginated API via URLSession, local cache with RealmSwift for instant load. MVC with Dependency Injection, 22 unit tests.</p>
+          <p class="project-summary">An iOS beer browser — explore, search and save beers from the BrewDog DIY Dog catalogue. Built with UIKit, SnapKit, RealmSwift and Swift Testing.</p>
+          <div class="project-details">
+            <div class="project-detail-row">
+              <span class="detail-label">Architecture</span>
+              <span>MVC with Dependency Injection — NetworkManager and DatabaseManager behind protocols, fully mockable.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Networking</span>
+              <span>Paginated API via native URLSession, no third-party networking. Request cancellation supported.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Storage</span>
+              <span>RealmSwift local cache — instant load on launch, favourites persistence, clear cache action.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">UI</span>
+              <span>Fully programmatic UIKit with SnapKit constraints. No Storyboard.</span>
+            </div>
+            <div class="project-detail-row">
+              <span class="detail-label">Tests</span>
+              <span>22 unit tests — BeerListController and BeerDetailController with mock network and database.</span>
+            </div>
+          </div>
           <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
         </div>
 
