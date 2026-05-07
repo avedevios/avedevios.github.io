@@ -771,6 +771,51 @@
     .project-readme hr { border: none; border-top: 1px solid #eee; margin: 1rem 0; }
     .project-readme a { color: #777; text-decoration: underline; }
 
+    /* ── README COLLAPSE ── */
+    .readme-wrap {
+      position: relative;
+    }
+
+    .readme-wrap.collapsed {
+      max-height: 120px;
+      overflow: hidden;
+    }
+
+    .readme-wrap.collapsed::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--l-bg, #fff));
+      pointer-events: none;
+    }
+
+    body.dark .readme-wrap.collapsed::after {
+      background: linear-gradient(to bottom, transparent, var(--bg, #0f0f0f));
+    }
+
+    .readme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #aaa;
+      padding: 0.25rem 0;
+      margin-top: 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .readme-toggle:hover { color: #555; }
+    body.dark .readme-toggle { color: var(--text4); }
+    body.dark .readme-toggle:hover { color: var(--accent2); }
+    body:not(.dark)[class*="lt-"] .readme-toggle { color: var(--l-text3); }
+    body:not(.dark)[class*="lt-"] .readme-toggle:hover { color: var(--l-accent); }
+
     body.dark .project-readme h2 { color: var(--accent2); }
     body.dark .project-readme h3 { color: var(--text2); }
     body.dark .project-readme p,
@@ -987,6 +1032,17 @@
       <h2>Projects</h2>
       <div class="project-list">
 
+        <div class="project-entry" id="project-jobsynck">
+          <div class="project-thumb">🔍</div>
+          <h3>JobSyncK</h3>
+          <div class="project-tags">
+            <span>JavaScript</span><span>Safari Extension</span><span>Node.js</span><span>SQLite</span><span>Express</span>
+          </div>
+          <p class="project-summary" id="desc-jobsynck">Loading...</p>
+          <div class="project-readme" id="readme-jobsynck"></div>
+          <a href="https://github.com/avedevios/JobSyncK" target="_blank">GitHub →</a>
+        </div>
+
         <div class="project-entry" id="project-calculnator">
           <div class="project-screenshots">
             <img src="assets/images/calculnator/calculnator-1.png" alt="calcuNator preview">
@@ -1064,6 +1120,7 @@
 <script>
   // загружаем проекты
   const projects = [
+    { id: 'jobsynck',    repo: 'JobSyncK'   },
     { id: 'calculnator', repo: 'calcuNator' },
     { id: 'memopair',    repo: 'MemoPair'   },
     { id: 'hopspot',     repo: 'HopSpot'    },
@@ -1083,7 +1140,25 @@
       .then(r => r.text())
       .then(md => {
         const el = document.getElementById(`readme-${id}`);
-        if (el) el.innerHTML = marked.parse(md);
+        if (!el) return;
+        el.innerHTML = marked.parse(md);
+
+        // collapse if content is tall enough
+        const wrap = document.createElement('div');
+        wrap.className = 'readme-wrap collapsed';
+        while (el.firstChild) wrap.appendChild(el.firstChild);
+        el.appendChild(wrap);
+
+        const btn = document.createElement('button');
+        btn.className = 'readme-toggle';
+        btn.innerHTML = '<i class="fa-solid fa-chevron-down"></i> Show more';
+        btn.addEventListener('click', () => {
+          const isCollapsed = wrap.classList.toggle('collapsed');
+          btn.innerHTML = isCollapsed
+            ? '<i class="fa-solid fa-chevron-down"></i> Show more'
+            : '<i class="fa-solid fa-chevron-up"></i> Show less';
+        });
+        el.appendChild(btn);
       });
   });
 
