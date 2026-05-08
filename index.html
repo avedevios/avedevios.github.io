@@ -1043,6 +1043,17 @@
           <a href="https://github.com/avedevios/JobSyncK" target="_blank">GitHub →</a>
         </div>
 
+        <div class="project-entry" id="project-lewens">
+          <div class="project-thumb">🧠</div>
+          <h3>lewens</h3>
+          <div class="project-tags">
+            <span>Product</span>
+          </div>
+          <p class="project-summary" id="desc-lewens">Loading...</p>
+          <div class="project-readme" id="readme-lewens"></div>
+          <a href="https://github.com/avedevios/lewens" target="_blank">GitHub →</a>
+        </div>
+
         <div class="project-entry" id="project-calculnator">
           <div class="project-screenshots">
             <img src="assets/images/calculnator/calculnator-1.png" alt="calcuNator preview">
@@ -1121,6 +1132,7 @@
   // загружаем проекты
   const projects = [
     { id: 'jobsynck',    repo: 'JobSyncK'   },
+    { id: 'lewens',      repo: 'lewens'     },
     { id: 'calculnator', repo: 'calcuNator' },
     { id: 'memopair',    repo: 'MemoPair'   },
     { id: 'hopspot',     repo: 'HopSpot'    },
@@ -1147,7 +1159,6 @@
         const wrap = document.createElement('div');
         wrap.className = 'readme-wrap collapsed';
         while (el.firstChild) wrap.appendChild(el.firstChild);
-        el.appendChild(wrap);
 
         const btn = document.createElement('button');
         btn.className = 'readme-toggle';
@@ -1157,7 +1168,15 @@
           btn.innerHTML = isCollapsed
             ? '<i class="fa-solid fa-chevron-down"></i> Show more'
             : '<i class="fa-solid fa-chevron-up"></i> Show less';
+          if (isCollapsed) {
+            // collapsed: "Show more" under preview
+            el.appendChild(btn);
+          } else {
+            // expanded: "Show less" above full text
+            el.insertBefore(btn, wrap);
+          }
         });
+        el.appendChild(wrap);
         el.appendChild(btn);
       });
   });
