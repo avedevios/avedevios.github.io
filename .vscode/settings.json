@@ -1,2 +1,8 @@
 {
+    "chat.tools.terminal.autoApprove": {
+        "/^perl -ne 'print \"\\$ARGV:\\$\\.: \\$_\" if /\\[А-Яа-яЁё\\]/' index\\.html \\| sort -u$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }

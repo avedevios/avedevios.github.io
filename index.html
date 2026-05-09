@@ -29,7 +29,7 @@
       transition: none;
     }
 
-    /* явные цвета для code в светлой теме */
+    /* explicit code colors in light theme */
     code {
       background: #f5f5f5;
       color: #333;
@@ -45,7 +45,7 @@
       color: inherit;
     }
 
-    /* отключаем дефолтный fade у View Transitions */
+    /* disable default fade for View Transitions */
     ::view-transition-old(root),
     ::view-transition-new(root) {
       animation: none;
@@ -66,6 +66,8 @@
       color: var(--l-text, #222);
       font-size: 17px;
       line-height: 1.7;
+      --link-color: #007AFF;
+      --link-color-hover: #0056b3;
     }
 
     a {
@@ -97,6 +99,8 @@
       --l-text3: #8a6a50;
       --l-accent: #7a4a20;
       --l-accent-hover: #2c1f14;
+      --link-color: var(--l-accent);
+      --link-color-hover: var(--l-accent-hover);
     }
 
     body.lt-slate {
@@ -108,6 +112,8 @@
       --l-text3: #4a6080;
       --l-accent: #2a5a8a;
       --l-accent-hover: #1a2332;
+      --link-color: var(--l-accent);
+      --link-color-hover: var(--l-accent-hover);
     }
 
     body.lt-mint {
@@ -119,6 +125,8 @@
       --l-text3: #3a7a5a;
       --l-accent: #1a8a50;
       --l-accent-hover: #0f2a1e;
+      --link-color: var(--l-accent);
+      --link-color-hover: var(--l-accent-hover);
     }
 
     body.lt-lavender {
@@ -130,6 +138,8 @@
       --l-text3: #6a50a0;
       --l-accent: #5a3aaa;
       --l-accent-hover: #1a1040;
+      --link-color: var(--l-accent);
+      --link-color-hover: var(--l-accent-hover);
     }
 
     body.lt-sepia {
@@ -141,6 +151,8 @@
       --l-text3: #7a6030;
       --l-accent: #8a6000;
       --l-accent-hover: #2a1f00;
+      --link-color: var(--l-accent);
+      --link-color-hover: var(--l-accent-hover);
     }
 
     /* apply light theme vars to elements — only when NOT in dark mode */
@@ -270,6 +282,8 @@
       --text4: #555;
       --accent: #d0d0d0;
       --accent2: #aaa;
+      --link-color: #4da3ff;
+      --link-color-hover: #80bfff;
       --glow: none;
     }
 
@@ -719,7 +733,7 @@
       display: none;
     }
 
-    /* скрываем # заголовок */
+    /* hide the # heading */
 
     #about-content p {
       font-size: 1.1rem;
@@ -1156,7 +1170,7 @@
       cursor: pointer;
       font-size: 1rem;
       font-weight: 600;
-      color: #007AFF; /* Яркий синий "Apple" цвет */
+      color: var(--link-color, #007AFF);
       padding: 0.25rem 0;
       margin-top: 0.5rem;
       display: inline-flex;
@@ -1166,16 +1180,20 @@
     }
 
     .readme-toggle:hover {
-      color: #0056b3;
+      color: var(--link-color-hover, #0056b3);
       text-decoration: underline;
     }
 
+    .readme-toggle + .readme-wrap {
+      margin-top: 0.5rem;
+    }
+
     body.dark .readme-toggle {
-      color: #4da3ff; /* Яркий синий для темной темы */
+      color: var(--link-color, #4da3ff);
     }
 
     body.dark .readme-toggle:hover {
-      color: #80bfff;
+      color: var(--link-color-hover, #80bfff);
     }
 
     body.dark .project-readme h2 {
@@ -1344,7 +1362,7 @@
         flex-direction: column;
       }
 
-      /* sidebar — компактная шапка */
+      /* sidebar — compact header */
       .sidebar {
         width: 100%;
         position: static;
@@ -1385,7 +1403,7 @@
         display: none;
       }
 
-      /* иконки в сайдбаре — горизонтально */
+      /* sidebar icons — horizontal */
       .sidebar-social {
         flex-direction: row;
         margin-top: 0;
@@ -1410,7 +1428,7 @@
         max-width: 100%;
       }
 
-      /* top bar — скрываем nav, оставляем только кнопку */
+      /* top bar — hide nav, keep only button */
       .fixed-nav {
         display: none;
       }
@@ -1420,12 +1438,12 @@
         right: 0.75rem;
       }
 
-      /* скриншоты — 1 в ряд на очень маленьких, 2 на средних */
+      /* screenshots — 1 per row on very small screens, 2 on medium */
       .project-screenshots {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      /* секции */
+      /* sections */
       .section {
         padding: 2rem 0;
       }
@@ -1441,7 +1459,7 @@
 
 <body class="preload">
   <script>
-    // Устанавливаем тему синхронно до рендера, чтобы избежать моргания цветов (FOUC)
+    // Set theme synchronously before render to avoid a flash of unstyled colors (FOUC)
     (function() {
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
@@ -1644,7 +1662,7 @@
 </html>
 
 <script>
-  // загружаем проекты
+  // load projects
   const projects = [
     { id: 'jobsynck', repo: 'JobSyncK' },
     { id: 'lewens', repo: 'lewens' },
@@ -1654,7 +1672,7 @@
   ];
 
   const fetchPromises = projects.flatMap(({ id, repo }) => {
-    // description из API
+    // description from API
     const p1 = fetch(`https://api.github.com/repos/avedevios/${repo}`)
       .then(r => r.json())
       .then(data => {
@@ -1663,7 +1681,7 @@
       })
       .catch(() => {});
 
-    // README через raw
+    // README via raw
     const p2 = fetch(`https://raw.githubusercontent.com/avedevios/${repo}/main/README.md`)
       .then(r => r.text())
       .then(md => {
@@ -1700,7 +1718,7 @@
     return [p1, p2];
   });
 
-  // загружаем About Me из README профиля
+  // load About Me from profile README
   fetch('https://raw.githubusercontent.com/avedevios/avedevios/main/README.md')
     .then(r => r.text())
     .then(md => {
@@ -1710,7 +1728,7 @@
       document.getElementById('about-content').innerHTML = '<p>Over a decade turning complex problems into working software. Started in enterprise ERP systems — finance, logistics, operations — then moved into mobile. Now I build apps end-to-end: architecture, features, CI/CD, App Store releases.</p>';
     });
 
-  // слайдер
+  // slider
   const sliderState = {};
 
   function slideProject(id, dir) {
@@ -1758,14 +1776,14 @@
     icon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
   }
 
-  // применяем неоновую тему — всегда softneon, без localStorage
+  // apply neon theme — always softneon, no localStorage
   applyNeonTheme('softneon');
 
-  // применяем светлую тему если выбрана, иначе paper по умолчанию
+  // apply selected light theme, otherwise paper by default
   const savedLight = localStorage.getItem('light-theme') || 'paper';
   applyLightTheme(savedLight);
 
-  // светлая/тёмная по системе
+  // light/dark based on system
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
   applyTheme(prefersDark.matches);
   prefersDark.addEventListener('change', e => applyTheme(e.matches));
@@ -1807,18 +1825,18 @@
     });
   }
 
-  // Ждем загрузки всех fetch-запросов (максимум 1.2 секунды), чтобы показать готовую страницу
+  // Wait for all fetch requests (max 1.2 seconds) to display the ready page
   Promise.race([
     Promise.allSettled(fetchPromises),
     new Promise(resolve => setTimeout(resolve, 1200))
   ]).then(() => {
-    // Небольшая задержка, чтобы браузер успел отрисовать DOM, затем снимаем preload (запускаем анимацию появления)
+    // Small delay so the browser can paint the DOM, then remove preload (start reveal animation)
     requestAnimationFrame(() => {
       document.body.classList.remove('preload');
     });
   });
 
-  // Плавное появление картинок и видео после загрузки
+  // Smooth reveal of images and video after loading
   document.querySelectorAll('img, video').forEach(media => {
     if (media.tagName.toLowerCase() === 'img') {
       if (media.complete) media.classList.add('loaded');
