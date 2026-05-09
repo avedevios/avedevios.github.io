@@ -1689,10 +1689,16 @@
         if (!el) return;
         el.innerHTML = marked.parse(md);
 
-        // collapse if content is tall enough
         const wrap = document.createElement('div');
-        wrap.className = 'readme-wrap collapsed';
+        wrap.className = 'readme-wrap';
         while (el.firstChild) wrap.appendChild(el.firstChild);
+        el.appendChild(wrap);
+
+        // show button only if content actually overflows
+        const COLLAPSE_LIMIT = 960;
+        if (wrap.scrollHeight <= COLLAPSE_LIMIT) return;
+
+        wrap.classList.add('collapsed');
 
         const btn = document.createElement('button');
         btn.className = 'readme-toggle';
@@ -1703,14 +1709,11 @@
             ? '<i class="fa-solid fa-chevron-down"></i> Show more'
             : '<i class="fa-solid fa-chevron-up"></i> Show less';
           if (isCollapsed) {
-            // collapsed: "Show more" under preview
             el.appendChild(btn);
           } else {
-            // expanded: "Show less" above full text
             el.insertBefore(btn, wrap);
           }
         });
-        el.appendChild(wrap);
         el.appendChild(btn);
       })
       .catch(() => {});
