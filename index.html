@@ -18,6 +18,10 @@
       transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
     }
 
+    .preload * {
+      transition: none !important;
+    }
+
     pre,
     code,
     pre *,
@@ -72,6 +76,15 @@
     a:hover {
       text-decoration: underline;
       color: var(--l-accent-hover, #222);
+    }
+
+    img, video {
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    img.loaded, video.loaded {
+      opacity: 1;
     }
 
     /* ── LIGHT THEMES ── */
@@ -620,6 +633,14 @@
       padding: 1.5rem 3rem 5rem;
       max-width: 1440px;
       margin: 0 auto;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .preload .main {
+      opacity: 0;
+      transform: translateY(15px);
     }
 
     /* ── NAV ── */
@@ -953,6 +974,7 @@
       color: #555;
       line-height: 1.6;
       margin-bottom: 1rem;
+      min-height: 48px;
     }
 
     body.dark .project-summary {
@@ -1001,6 +1023,33 @@
 
     body:not(.dark)[class*="lt-"] .project-detail-row {
       color: var(--l-text2);
+    }
+
+    /* ── PROJECT README SKELETON ── */
+    .project-readme:empty {
+      min-height: 240px;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse-bg 1.5s infinite ease-in-out;
+    }
+
+    body.dark .project-readme:empty {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .project-readme:empty::after {
+      content: 'Loading README...';
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    @keyframes pulse-bg {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
     }
 
     /* ── PROJECT README ── */
@@ -1390,7 +1439,17 @@
   </style>
 </head>
 
-<body>
+<body class="preload">
+  <script>
+    // Устанавливаем тему синхронно до рендера, чтобы избежать моргания цветов (FOUC)
+    (function() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+      document.body.classList.add('t-softneon');
+      document.body.classList.add('lt-' + (localStorage.getItem('light-theme') || 'paper'));
+    })();
+  </script>
 
   <!-- THEME TOGGLE -->
   <div class="top-bar">
@@ -1594,17 +1653,18 @@
     { id: 'hopspot', repo: 'HopSpot' },
   ];
 
-  projects.forEach(({ id, repo }) => {
+  const fetchPromises = projects.flatMap(({ id, repo }) => {
     // description из API
-    fetch(`https://api.github.com/repos/avedevios/${repo}`)
+    const p1 = fetch(`https://api.github.com/repos/avedevios/${repo}`)
       .then(r => r.json())
       .then(data => {
         const el = document.getElementById(`desc-${id}`);
         if (el) el.textContent = data.description || '';
-      });
+      })
+      .catch(() => {});
 
     // README через raw
-    fetch(`https://raw.githubusercontent.com/avedevios/${repo}/main/README.md`)
+    const p2 = fetch(`https://raw.githubusercontent.com/avedevios/${repo}/main/README.md`)
       .then(r => r.text())
       .then(md => {
         const el = document.getElementById(`readme-${id}`);
@@ -1634,7 +1694,10 @@
         });
         el.appendChild(wrap);
         el.appendChild(btn);
-      });
+      })
+      .catch(() => {});
+
+    return [p1, p2];
   });
 
   // загружаем About Me из README профиля
@@ -1743,7 +1806,28 @@
       );
     });
   }
+
+  // Ждем загрузки всех fetch-запросов (максимум 1.2 секунды), чтобы показать готовую страницу
+  Promise.race([
+    Promise.allSettled(fetchPromises),
+    new Promise(resolve => setTimeout(resolve, 1200))
+  ]).then(() => {
+    // Небольшая задержка, чтобы браузер успел отрисовать DOM, затем снимаем preload (запускаем анимацию появления)
+    requestAnimationFrame(() => {
+      document.body.classList.remove('preload');
+    });
+  });
+
+  // Плавное появление картинок и видео после загрузки
+  document.querySelectorAll('img, video').forEach(media => {
+    if (media.tagName.toLowerCase() === 'img') {
+      if (media.complete) media.classList.add('loaded');
+      else media.addEventListener('load', () => media.classList.add('loaded'));
+    } else {
+      if (media.readyState >= 3) media.classList.add('loaded');
+      else media.addEventListener('loadeddata', () => media.classList.add('loaded'));
+    }
+  });
 </script>
 </body>
-
 </html>
