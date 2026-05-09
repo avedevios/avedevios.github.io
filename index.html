@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +18,28 @@
       transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
     }
 
-    pre, code, pre *, code * {
+    pre,
+    code,
+    pre *,
+    code * {
       transition: none;
     }
 
     /* явные цвета для code в светлой теме */
-    code { background: #f5f5f5; color: #333; }
-    pre  { background: #f5f5f5; color: #333; }
-    pre code { background: none; color: inherit; }
+    code {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    pre {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    pre code {
+      background: none;
+      color: inherit;
+    }
 
     /* отключаем дефолтный fade у View Transitions */
     ::view-transition-old(root),
@@ -61,171 +76,259 @@
 
     /* ── LIGHT THEMES ── */
     body.lt-paper {
-      --l-bg:           #faf8f5;
-      --l-bg2:          #f0ebe3;
-      --l-border:       #e0d8cc;
-      --l-text:         #2c1f14;
-      --l-text2:        #6a5040;
-      --l-text3:        #8a6a50;
-      --l-accent:       #7a4a20;
+      --l-bg: #faf8f5;
+      --l-bg2: #f0ebe3;
+      --l-border: #e0d8cc;
+      --l-text: #2c1f14;
+      --l-text2: #6a5040;
+      --l-text3: #8a6a50;
+      --l-accent: #7a4a20;
       --l-accent-hover: #2c1f14;
     }
 
     body.lt-slate {
-      --l-bg:           #f4f6f9;
-      --l-bg2:          #e8edf4;
-      --l-border:       #d0d8e4;
-      --l-text:         #1a2332;
-      --l-text2:        #3a5070;
-      --l-text3:        #4a6080;
-      --l-accent:       #2a5a8a;
+      --l-bg: #f4f6f9;
+      --l-bg2: #e8edf4;
+      --l-border: #d0d8e4;
+      --l-text: #1a2332;
+      --l-text2: #3a5070;
+      --l-text3: #4a6080;
+      --l-accent: #2a5a8a;
       --l-accent-hover: #1a2332;
     }
 
     body.lt-mint {
-      --l-bg:           #f4faf7;
-      --l-bg2:          #e4f5ee;
-      --l-border:       #c8eadb;
-      --l-text:         #0f2a1e;
-      --l-text2:        #2a6a4a;
-      --l-text3:        #3a7a5a;
-      --l-accent:       #1a8a50;
+      --l-bg: #f4faf7;
+      --l-bg2: #e4f5ee;
+      --l-border: #c8eadb;
+      --l-text: #0f2a1e;
+      --l-text2: #2a6a4a;
+      --l-text3: #3a7a5a;
+      --l-accent: #1a8a50;
       --l-accent-hover: #0f2a1e;
     }
 
     body.lt-lavender {
-      --l-bg:           #f7f5ff;
-      --l-bg2:          #ede8ff;
-      --l-border:       #d8d0f8;
-      --l-text:         #1a1040;
-      --l-text2:        #4a3880;
-      --l-text3:        #6a50a0;
-      --l-accent:       #5a3aaa;
+      --l-bg: #f7f5ff;
+      --l-bg2: #ede8ff;
+      --l-border: #d8d0f8;
+      --l-text: #1a1040;
+      --l-text2: #4a3880;
+      --l-text3: #6a50a0;
+      --l-accent: #5a3aaa;
       --l-accent-hover: #1a1040;
     }
 
     body.lt-sepia {
-      --l-bg:           #fdf6e3;
-      --l-bg2:          #f5eccc;
-      --l-border:       #e8d8a0;
-      --l-text:         #2a1f00;
-      --l-text2:        #5a4010;
-      --l-text3:        #7a6030;
-      --l-accent:       #8a6000;
+      --l-bg: #fdf6e3;
+      --l-bg2: #f5eccc;
+      --l-border: #e8d8a0;
+      --l-text: #2a1f00;
+      --l-text2: #5a4010;
+      --l-text3: #7a6030;
+      --l-accent: #8a6000;
       --l-accent-hover: #2a1f00;
     }
 
     /* apply light theme vars to elements — only when NOT in dark mode */
-    body:not(.dark)[class*="lt-"] .sidebar        { border-right-color: var(--l-border); background: var(--l-bg); }
-    body:not(.dark)[class*="lt-"] .sidebar img    { border-color: var(--l-border); }
-    body:not(.dark)[class*="lt-"] .sidebar h1     { color: var(--l-text); }
-    body:not(.dark)[class*="lt-"] .sidebar .role  { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .sidebar .bio   { color: var(--l-text2); }
-    body:not(.dark)[class*="lt-"] .sidebar-links li   { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .sidebar-links li a { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .sidebar-links li a:hover { color: var(--l-accent); }
-    body:not(.dark)[class*="lt-"] .main           { background: var(--l-bg); }
-    body:not(.dark)[class*="lt-"] .topnav         { border-bottom-color: var(--l-border); }
-    body:not(.dark)[class*="lt-"] .topnav a       { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .topnav a:hover { color: var(--l-accent); }
-    body:not(.dark)[class*="lt-"] .section h2     { border-bottom-color: var(--l-border); color: var(--l-text); }
-    body:not(.dark)[class*="lt-"] .section p      { color: var(--l-text2); }
-    body:not(.dark)[class*="lt-"] .project-entry  { border-bottom-color: var(--l-border); }
-    body:not(.dark)[class*="lt-"] .project-thumb  { background: var(--l-bg2); border-color: var(--l-border); }
-    body:not(.dark)[class*="lt-"] .project-entry h3 { color: var(--l-text); }
-    body:not(.dark)[class*="lt-"] .project-entry p  { color: var(--l-text2); }
-    body:not(.dark)[class*="lt-"] .project-entry a  { color: var(--l-accent); }
-    body:not(.dark)[class*="lt-"] .project-tags span { background: var(--l-bg2); color: var(--l-text3); border-color: var(--l-border); }
-    body:not(.dark)[class*="lt-"] .skills-grid span  { background: var(--l-bg2); border-color: var(--l-border); color: var(--l-text2); }
-    body:not(.dark)[class*="lt-"] footer          { border-top-color: var(--l-border); color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .theme-toggle   { border-color: var(--l-border); background: var(--l-bg); }
-    body:not(.dark)[class*="lt-"] .theme-toggle i { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"]                 { background: var(--l-bg); color: var(--l-text); }
+    body:not(.dark)[class*="lt-"] .sidebar {
+      border-right-color: var(--l-border);
+      background: var(--l-bg);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar img {
+      border-color: var(--l-border);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar h1 {
+      color: var(--l-text);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar .role {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar .bio {
+      color: var(--l-text2);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-links li {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-links li a {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-links li a:hover {
+      color: var(--l-accent);
+    }
+
+    body:not(.dark)[class*="lt-"] .main {
+      background: var(--l-bg);
+    }
+
+    body:not(.dark)[class*="lt-"] .topnav {
+      border-bottom-color: var(--l-border);
+    }
+
+    body:not(.dark)[class*="lt-"] .topnav a {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .topnav a:hover {
+      color: var(--l-accent);
+    }
+
+    body:not(.dark)[class*="lt-"] .section h2 {
+      border-bottom-color: var(--l-border);
+      color: var(--l-text);
+    }
+
+    body:not(.dark)[class*="lt-"] .section p {
+      color: var(--l-text2);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-entry {
+      border-bottom-color: var(--l-border);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-thumb {
+      background: var(--l-bg2);
+      border-color: var(--l-border);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-entry h3 {
+      color: var(--l-text);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-entry p {
+      color: var(--l-text2);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-entry a {
+      color: var(--l-accent);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-tags span {
+      background: var(--l-bg2);
+      color: var(--l-text3);
+      border-color: var(--l-border);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-skills h3 {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-skills-grid span {
+      background: var(--l-bg2);
+      border-color: var(--l-border);
+      color: var(--l-text2);
+    }
+
+    body:not(.dark)[class*="lt-"] footer {
+      border-top-color: var(--l-border);
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .theme-toggle {
+      border-color: var(--l-border);
+      background: var(--l-bg);
+    }
+
+    body:not(.dark)[class*="lt-"] .theme-toggle i {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] {
+      background: var(--l-bg);
+      color: var(--l-text);
+    }
 
     /* ── DARK THEME BASE VARS ── */
     body.dark {
-      --bg:        #0f0f0f;
-      --bg2:       #161616;
-      --bg3:       #1a1a1a;
-      --border:    #222;
-      --text:      #d0d0d0;
-      --text2:     #888;
-      --text3:     #666;
-      --text4:     #555;
-      --accent:    #d0d0d0;
-      --accent2:   #aaa;
-      --glow:      none;
+      --bg: #0f0f0f;
+      --bg2: #161616;
+      --bg3: #1a1a1a;
+      --border: #222;
+      --text: #d0d0d0;
+      --text2: #888;
+      --text3: #666;
+      --text4: #555;
+      --accent: #d0d0d0;
+      --accent2: #aaa;
+      --glow: none;
     }
 
     /* ── NEON THEMES ── */
     body.dark.t-cyberpunk {
-      --bg:      #0a0a0f;
-      --bg2:     #1a0a2e;
-      --bg3:     #1a0a2e;
-      --border:  #2a0a4e;
-      --text:    #e0d0ff;
-      --text2:   #b44fff;
-      --text3:   #00fff0;
-      --text4:   #7a4faa;
-      --accent:  #b44fff;
+      --bg: #0a0a0f;
+      --bg2: #1a0a2e;
+      --bg3: #1a0a2e;
+      --border: #2a0a4e;
+      --text: #e0d0ff;
+      --text2: #b44fff;
+      --text3: #00fff0;
+      --text4: #7a4faa;
+      --accent: #b44fff;
       --accent2: #00fff0;
-      --glow:    0 0 10px #b44fff66;
+      --glow: 0 0 10px #b44fff66;
     }
 
     body.dark.t-matrix {
-      --bg:      #050f05;
-      --bg2:     #0a1f0a;
-      --bg3:     #0a1f0a;
-      --border:  #0f2f0f;
-      --text:    #c0ffc0;
-      --text2:   #00ff41;
-      --text3:   #39ff14;
-      --text4:   #1a8a1a;
-      --accent:  #00ff41;
+      --bg: #050f05;
+      --bg2: #0a1f0a;
+      --bg3: #0a1f0a;
+      --border: #0f2f0f;
+      --text: #c0ffc0;
+      --text2: #00ff41;
+      --text3: #39ff14;
+      --text4: #1a8a1a;
+      --accent: #00ff41;
       --accent2: #39ff14;
-      --glow:    0 0 10px #00ff4166;
+      --glow: 0 0 10px #00ff4166;
     }
 
     body.dark.t-synthwave {
-      --bg:      #130020;
-      --bg2:     #1c0030;
-      --bg3:     #1c0030;
-      --border:  #2d1045;
-      --text:    #e8d0f0;
-      --text2:   #d4709a;
-      --text3:   #c9a0d4;
-      --text4:   #7a5080;
-      --accent:  #d4709a;
+      --bg: #130020;
+      --bg2: #1c0030;
+      --bg3: #1c0030;
+      --border: #2d1045;
+      --text: #e8d0f0;
+      --text2: #d4709a;
+      --text3: #c9a0d4;
+      --text4: #7a5080;
+      --accent: #d4709a;
       --accent2: #c9a0d4;
-      --glow:    0 0 8px #d4709a44;
+      --glow: 0 0 8px #d4709a44;
     }
 
     body.dark.t-softneon {
-      --bg:      #0f0f1a;
-      --bg2:     #1a1a2e;
-      --bg3:     #1a1a2e;
-      --border:  #2a2a4e;
-      --text:    #d0e8ff;
-      --text2:   #4fc3f7;
-      --text3:   #c084fc;
-      --text4:   #4a6a8a;
-      --accent:  #4fc3f7;
+      --bg: #0f0f1a;
+      --bg2: #1a1a2e;
+      --bg3: #1a1a2e;
+      --border: #2a2a4e;
+      --text: #d0e8ff;
+      --text2: #4fc3f7;
+      --text3: #c084fc;
+      --text4: #4a6a8a;
+      --accent: #4fc3f7;
       --accent2: #c084fc;
-      --glow:    0 0 10px #4fc3f766;
+      --glow: 0 0 10px #4fc3f766;
     }
 
     body.dark.t-amber {
-      --bg:      #0d0800;
-      --bg2:     #1a1000;
-      --bg3:     #1a1000;
-      --border:  #2a1a00;
-      --text:    #ffe8b0;
-      --text2:   #ffb300;
-      --text3:   #ff6b00;
-      --text4:   #8a5a00;
-      --accent:  #ffb300;
+      --bg: #0d0800;
+      --bg2: #1a1000;
+      --bg3: #1a1000;
+      --border: #2a1a00;
+      --text: #ffe8b0;
+      --text2: #ffb300;
+      --text3: #ff6b00;
+      --text4: #8a5a00;
+      --accent: #ffb300;
       --accent2: #ff6b00;
-      --glow:    0 0 10px #ffb30066;
+      --glow: 0 0 10px #ffb30066;
     }
 
     /* ── DARK STYLES using vars ── */
@@ -234,34 +337,111 @@
       color: var(--text);
     }
 
-    body.dark a { color: var(--accent2); }
-    body.dark a:hover { color: var(--accent); }
+    body.dark a {
+      color: var(--accent2);
+    }
 
-    body.dark .sidebar { border-right-color: var(--border); }
-    body.dark .sidebar h1 { color: var(--accent); text-shadow: var(--glow); }
-    body.dark .sidebar .role { color: var(--text4); }
-    body.dark .sidebar .bio { color: var(--text3); }
-    body.dark .sidebar-links li { color: var(--text3); }
-    body.dark .sidebar-links li a { color: var(--text3); }
-    body.dark .sidebar-links li a:hover { color: var(--accent); }
-    body.dark .sidebar img { border-color: var(--border); box-shadow: var(--glow); }
+    body.dark a:hover {
+      color: var(--accent);
+    }
 
-    body.dark .topnav { border-bottom-color: var(--border); }
-    body.dark .topnav a { color: var(--text4); }
-    body.dark .topnav a:hover { color: var(--accent); }
+    body.dark .sidebar {
+      border-right-color: var(--border);
+    }
 
-    body.dark .section h2 { border-bottom-color: var(--border); color: var(--accent); text-shadow: var(--glow); }
-    body.dark .section p { color: var(--text2); }
+    body.dark .sidebar h1 {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
 
-    body.dark .project-entry { border-bottom-color: var(--border); }
-    body.dark .project-thumb { background: var(--bg2); border-color: var(--border); }
-    body.dark .project-entry h3 { color: var(--accent); text-shadow: var(--glow); }
-    body.dark .project-entry p { color: var(--text3); }
-    body.dark .project-entry a { color: var(--accent2); }
-    body.dark .project-entry a:hover { color: var(--accent); }
-    body.dark .project-tags span { background: var(--bg3); color: var(--accent2); border: 1px solid var(--border); }
+    body.dark .sidebar .role {
+      color: var(--text4);
+    }
 
-    body.dark .skills-grid span { background: var(--bg2); border-color: var(--border); color: var(--accent2); }
+    body.dark .sidebar .bio {
+      color: var(--text3);
+    }
+
+    body.dark .sidebar-links li {
+      color: var(--text3);
+    }
+
+    body.dark .sidebar-links li a {
+      color: var(--text3);
+    }
+
+    body.dark .sidebar-links li a:hover {
+      color: var(--accent);
+    }
+
+    body.dark .sidebar img {
+      border-color: var(--border);
+      box-shadow: var(--glow);
+    }
+
+    body.dark .topnav {
+      border-bottom-color: var(--border);
+    }
+
+    body.dark .topnav a {
+      color: var(--text4);
+    }
+
+    body.dark .topnav a:hover {
+      color: var(--accent);
+    }
+
+    body.dark .section h2 {
+      border-bottom-color: var(--border);
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+
+    body.dark .section p {
+      color: var(--text2);
+    }
+
+    body.dark .project-entry {
+      border-bottom-color: var(--border);
+    }
+
+    body.dark .project-thumb {
+      background: var(--bg2);
+      border-color: var(--border);
+    }
+
+    body.dark .project-entry h3 {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+
+    body.dark .project-entry p {
+      color: var(--text3);
+    }
+
+    body.dark .project-entry a {
+      color: var(--accent2);
+    }
+
+    body.dark .project-entry a:hover {
+      color: var(--accent);
+    }
+
+    body.dark .project-tags span {
+      background: var(--bg3);
+      color: var(--accent2);
+      border: 1px solid var(--border);
+    }
+
+    body.dark .sidebar-skills h3 {
+      color: var(--text4);
+    }
+
+    body.dark .sidebar-skills-grid span {
+      background: var(--bg2);
+      border-color: var(--border);
+      color: var(--accent2);
+    }
 
     /* ── TOP BAR ── */
     .top-bar {
@@ -293,10 +473,21 @@
       text-decoration: none;
     }
 
-    body.dark .fixed-nav a { color: #555; }
-    body.dark .fixed-nav a:hover { color: var(--accent, #4fc3f7); }
-    body:not(.dark)[class*="lt-"] .fixed-nav a { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .fixed-nav a:hover { color: var(--l-accent); }
+    body.dark .fixed-nav a {
+      color: #555;
+    }
+
+    body.dark .fixed-nav a:hover {
+      color: var(--accent, #4fc3f7);
+    }
+
+    body:not(.dark)[class*="lt-"] .fixed-nav a {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .fixed-nav a:hover {
+      color: var(--l-accent);
+    }
 
     /* ── THEME TOGGLE ── */
     .theme-toggle {
@@ -347,7 +538,7 @@
 
     /* ── SIDEBAR ── */
     .sidebar {
-      width: 260px;
+      width: 320px;
       flex-shrink: 0;
       padding: 2.5rem 1.5rem;
       border-right: 1px solid #eee;
@@ -360,12 +551,17 @@
     }
 
     .sidebar img {
-      width: 160px;
-      height: 160px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid #ddd;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .sidebar-text {
+      text-align: center;
     }
 
     .sidebar h1 {
@@ -422,7 +618,7 @@
     .main {
       flex: 1;
       padding: 1.5rem 3rem 5rem;
-      max-width: 1200px;
+      max-width: 1440px;
       margin: 0 auto;
     }
 
@@ -478,8 +674,13 @@
       border: 2px solid #eee;
     }
 
-    body.dark .about-photo { border-color: var(--border); }
-    body:not(.dark)[class*="lt-"] .about-photo { border-color: var(--l-border); }
+    body.dark .about-photo {
+      border-color: var(--border);
+    }
+
+    body:not(.dark)[class*="lt-"] .about-photo {
+      border-color: var(--l-border);
+    }
 
     /* ── MARKDOWN CONTENT ── */
     #about-content h1,
@@ -493,7 +694,11 @@
       padding-bottom: 0.3rem;
     }
 
-    #about-content h1 { display: none; } /* скрываем # заголовок */
+    #about-content h1 {
+      display: none;
+    }
+
+    /* скрываем # заголовок */
 
     #about-content p {
       font-size: 0.95rem;
@@ -525,20 +730,46 @@
       text-decoration: underline;
     }
 
-    #about-content hr { border: none; border-top: 1px solid #eee; margin: 1rem 0; }
+    #about-content hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 1rem 0;
+    }
 
     body.dark #about-content h2,
-    body.dark #about-content h3 { color: var(--accent); border-bottom-color: var(--border); }
+    body.dark #about-content h3 {
+      color: var(--accent);
+      border-bottom-color: var(--border);
+    }
+
     body.dark #about-content p,
-    body.dark #about-content li { color: var(--text3); }
-    body.dark #about-content code { background: var(--bg2); color: var(--accent2); }
-    body.dark #about-content hr { border-top-color: var(--border); }
+    body.dark #about-content li {
+      color: var(--text3);
+    }
+
+    body.dark #about-content code {
+      background: var(--bg2);
+      color: var(--accent2);
+    }
+
+    body.dark #about-content hr {
+      border-top-color: var(--border);
+    }
 
     body:not(.dark)[class*="lt-"] #about-content h2,
-    body:not(.dark)[class*="lt-"] #about-content h3 { color: var(--l-text); border-bottom-color: var(--l-border); }
+    body:not(.dark)[class*="lt-"] #about-content h3 {
+      color: var(--l-text);
+      border-bottom-color: var(--l-border);
+    }
+
     body:not(.dark)[class*="lt-"] #about-content p,
-    body:not(.dark)[class*="lt-"] #about-content li { color: var(--l-text2); }
-    body:not(.dark)[class*="lt-"] #about-content code { background: var(--l-bg2); }
+    body:not(.dark)[class*="lt-"] #about-content li {
+      color: var(--l-text2);
+    }
+
+    body:not(.dark)[class*="lt-"] #about-content code {
+      background: var(--l-bg2);
+    }
 
     /* ── EXPERIENCE ── */
     .experience-list {
@@ -583,23 +814,51 @@
       margin-bottom: 0.5rem;
     }
 
-    .experience-item > p:last-child {
+    .experience-item>p:last-child {
       font-size: 0.9rem;
       color: #666;
       line-height: 1.7;
     }
 
-    body.dark .experience-item { border-bottom-color: var(--border); }
-    body.dark .experience-header h3 { color: var(--accent); }
-    body.dark .experience-date { color: var(--text4); }
-    body.dark .experience-company { color: var(--text4); }
-    body.dark .experience-item > p:last-child { color: var(--text3); }
+    body.dark .experience-item {
+      border-bottom-color: var(--border);
+    }
 
-    body:not(.dark)[class*="lt-"] .experience-item { border-bottom-color: var(--l-border); }
-    body:not(.dark)[class*="lt-"] .experience-header h3 { color: var(--l-text); }
-    body:not(.dark)[class*="lt-"] .experience-date { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .experience-company { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .experience-item > p:last-child { color: var(--l-text2); }
+    body.dark .experience-header h3 {
+      color: var(--accent);
+    }
+
+    body.dark .experience-date {
+      color: var(--text4);
+    }
+
+    body.dark .experience-company {
+      color: var(--text4);
+    }
+
+    body.dark .experience-item>p:last-child {
+      color: var(--text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .experience-item {
+      border-bottom-color: var(--l-border);
+    }
+
+    body:not(.dark)[class*="lt-"] .experience-header h3 {
+      color: var(--l-text);
+    }
+
+    body:not(.dark)[class*="lt-"] .experience-date {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .experience-company {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .experience-item>p:last-child {
+      color: var(--l-text2);
+    }
 
     /* ── PROJECTS ── */
     .project-list {
@@ -687,8 +946,14 @@
       margin-bottom: 1rem;
     }
 
-    body.dark .project-summary { color: var(--text2); }
-    body:not(.dark)[class*="lt-"] .project-summary { color: var(--l-text2); }
+    body.dark .project-summary {
+      color: var(--text2);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-summary {
+      color: var(--l-text2);
+    }
+
     .project-details {
       display: flex;
       flex-direction: column;
@@ -713,13 +978,27 @@
       padding-top: 0.1rem;
     }
 
-    body.dark .detail-label { color: var(--accent2); }
-    body.dark .project-detail-row { color: var(--text3); }
-    body:not(.dark)[class*="lt-"] .detail-label { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .project-detail-row { color: var(--l-text2); }
+    body.dark .detail-label {
+      color: var(--accent2);
+    }
+
+    body.dark .project-detail-row {
+      color: var(--text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .detail-label {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-detail-row {
+      color: var(--l-text2);
+    }
 
     /* ── PROJECT README ── */
-    .project-readme h1 { display: none; }
+    .project-readme h1 {
+      display: none;
+    }
+
     .project-readme h2 {
       font-size: 0.85rem;
       font-weight: 600;
@@ -730,27 +1009,32 @@
       border: none;
       padding: 0;
     }
+
     .project-readme h3 {
       font-size: 0.9rem;
       font-weight: 600;
       color: #555;
       margin: 0.75rem 0 0.3rem;
     }
+
     .project-readme p {
       font-size: 0.88rem;
       color: #666;
       line-height: 1.65;
       margin-bottom: 0.5rem;
     }
+
     .project-readme ul {
       padding-left: 1.25rem;
       margin-bottom: 0.5rem;
     }
+
     .project-readme li {
       font-size: 0.88rem;
       color: #666;
       line-height: 1.65;
     }
+
     .project-readme pre {
       background: #f5f5f5;
       border-radius: 8px;
@@ -758,18 +1042,29 @@
       overflow-x: auto;
       margin-bottom: 0.75rem;
     }
+
     .project-readme code {
       font-size: 0.8rem;
       background: #f5f5f5;
       border-radius: 4px;
       padding: 0.1rem 0.3rem;
     }
+
     .project-readme pre code {
       background: none;
       padding: 0;
     }
-    .project-readme hr { border: none; border-top: 1px solid #eee; margin: 1rem 0; }
-    .project-readme a { color: #777; text-decoration: underline; }
+
+    .project-readme hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 1rem 0;
+    }
+
+    .project-readme a {
+      color: #777;
+      text-decoration: underline;
+    }
 
     /* ── README COLLAPSE ── */
     .readme-wrap {
@@ -810,25 +1105,62 @@
       transition: color 0.2s;
     }
 
-    .readme-toggle:hover { color: #555; }
-    body.dark .readme-toggle { color: var(--text4); }
-    body.dark .readme-toggle:hover { color: var(--accent2); }
-    body:not(.dark)[class*="lt-"] .readme-toggle { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .readme-toggle:hover { color: var(--l-accent); }
+    .readme-toggle:hover {
+      color: #555;
+    }
 
-    body.dark .project-readme h2 { color: var(--accent2); }
-    body.dark .project-readme h3 { color: var(--text2); }
+    body.dark .readme-toggle {
+      color: var(--text4);
+    }
+
+    body.dark .readme-toggle:hover {
+      color: var(--accent2);
+    }
+
+    body:not(.dark)[class*="lt-"] .readme-toggle {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .readme-toggle:hover {
+      color: var(--l-accent);
+    }
+
+    body.dark .project-readme h2 {
+      color: var(--accent2);
+    }
+
+    body.dark .project-readme h3 {
+      color: var(--text2);
+    }
+
     body.dark .project-readme p,
-    body.dark .project-readme li { color: var(--text3); }
-    body.dark .project-readme pre,
-    body.dark .project-readme code { background: var(--bg2); color: var(--accent2); }
-    body.dark .project-readme hr { border-top-color: var(--border); }
+    body.dark .project-readme li {
+      color: var(--text3);
+    }
 
-    body:not(.dark)[class*="lt-"] .project-readme h2 { color: var(--l-text3); }
+    body.dark .project-readme pre,
+    body.dark .project-readme code {
+      background: var(--bg2);
+      color: var(--accent2);
+    }
+
+    body.dark .project-readme hr {
+      border-top-color: var(--border);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-readme h2 {
+      color: var(--l-text3);
+    }
+
     body:not(.dark)[class*="lt-"] .project-readme p,
-    body:not(.dark)[class*="lt-"] .project-readme li { color: var(--l-text2); }
+    body:not(.dark)[class*="lt-"] .project-readme li {
+      color: var(--l-text2);
+    }
+
     body:not(.dark)[class*="lt-"] .project-readme pre,
-    body:not(.dark)[class*="lt-"] .project-readme code { background: var(--l-bg2); }
+    body:not(.dark)[class*="lt-"] .project-readme code {
+      background: var(--l-bg2);
+    }
 
     /* ── SCREENSHOTS GRID ── */
     .project-screenshots {
@@ -844,51 +1176,73 @@
       object-fit: cover;
     }
 
-    body.dark .project-screenshots img { border-color: var(--border); }
-    body:not(.dark)[class*="lt-"] .project-screenshots img { border-color: var(--l-border); }
+    body.dark .project-screenshots img {
+      border-color: var(--border);
+    }
+
+    body:not(.dark)[class*="lt-"] .project-screenshots img {
+      border-color: var(--l-border);
+    }
 
     /* Theme-aware screenshots (site light/dark toggle) */
     .theme-appearance .appearance-shots--night {
       display: none;
     }
+
     body.dark .theme-appearance .appearance-shots--day {
       display: none;
     }
+
     body.dark .theme-appearance .appearance-shots--night {
       display: grid;
     }
+
     .theme-appearance .project-screenshots:not(:has(img:nth-child(2))) {
       grid-template-columns: 1fr;
     }
 
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    /* ── SIDEBAR SKILLS ── */
+    .sidebar-skills {
+      margin-bottom: 1.5rem;
     }
 
-    .skills-grid span {
-      font-size: 0.8rem;
+    .sidebar-skills h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #aaa;
+      margin-bottom: 0.75rem;
+    }
+
+    .sidebar-skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .sidebar-skills-grid span {
+      font-size: 0.75rem;
       color: #555;
       background: #f5f5f5;
       border: 1px solid #eee;
       border-radius: 6px;
-      padding: 0.25rem 0.65rem;
+      padding: 0.2rem 0.5rem;
     }
 
     /* ── SOCIAL ICONS IN SIDEBAR ── */
     .sidebar-social {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.1rem;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
       margin-top: auto;
-      padding-top: 2rem;
+      padding-top: 1.5rem;
     }
 
     .sidebar-social a {
-      font-size: 2rem;
+      font-size: 2.4rem;
       color: #aaa;
       text-decoration: none;
       transition: color 0.2s, transform 0.2s;
@@ -902,25 +1256,40 @@
     }
 
     .sidebar-social-line {
-      width: 1px;
-      height: 100px;
-      background: #ddd;
-      margin-top: 0.25rem;
+      display: none;
     }
 
-    body.dark .sidebar-social a { color: #444; }
-    body.dark .sidebar-social a:hover { color: var(--accent, #4fc3f7); }
-    body.dark .sidebar-social-line { background: #2a2a2a; }
+    body.dark .sidebar-social a {
+      color: #444;
+    }
 
-    body:not(.dark)[class*="lt-"] .sidebar-social a { color: var(--l-text3); }
-    body:not(.dark)[class*="lt-"] .sidebar-social a:hover { color: var(--l-accent); }
-    body:not(.dark)[class*="lt-"] .sidebar-social-line { background: var(--l-border); }
+    body.dark .sidebar-social a:hover {
+      color: var(--accent, #4fc3f7);
+    }
+
+    body.dark .sidebar-social-line {
+      background: #2a2a2a;
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-social a {
+      color: var(--l-text3);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-social a:hover {
+      color: var(--l-accent);
+    }
+
+    body:not(.dark)[class*="lt-"] .sidebar-social-line {
+      background: var(--l-border);
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
 
       /* layout */
-      .layout { flex-direction: column; }
+      .layout {
+        flex-direction: column;
+      }
 
       /* sidebar — компактная шапка */
       .sidebar {
@@ -935,6 +1304,7 @@
         align-items: center;
         gap: 1rem;
         overflow: visible;
+        flex-wrap: wrap;
       }
 
       .sidebar img {
@@ -946,11 +1316,21 @@
 
       .sidebar-text {
         flex: 1;
+        text-align: left;
       }
 
-      .sidebar h1 { font-size: 1.1rem; }
-      .sidebar .role { font-size: 0.8rem; margin-bottom: 0; }
-      .sidebar .bio { display: none; }
+      .sidebar h1 {
+        font-size: 1.1rem;
+      }
+
+      .sidebar .role {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+      }
+
+      .sidebar .bio {
+        display: none;
+      }
 
       /* иконки в сайдбаре — горизонтально */
       .sidebar-social {
@@ -960,7 +1340,16 @@
         gap: 0.9rem;
       }
 
-      .sidebar-social-line { display: none; }
+      .sidebar-social-line {
+        display: none;
+      }
+
+      .sidebar-skills {
+        width: 100%;
+        margin-bottom: 0;
+        margin-top: 0.5rem;
+        order: 4;
+      }
 
       /* main */
       .main {
@@ -969,7 +1358,9 @@
       }
 
       /* top bar — скрываем nav, оставляем только кнопку */
-      .fixed-nav { display: none; }
+      .fixed-nav {
+        display: none;
+      }
 
       .top-bar {
         top: 0.75rem;
@@ -982,7 +1373,9 @@
       }
 
       /* секции */
-      .section { padding: 2rem 0; }
+      .section {
+        padding: 2rem 0;
+      }
     }
 
     @media (max-width: 480px) {
@@ -992,195 +1385,214 @@
     }
   </style>
 </head>
+
 <body>
 
-<!-- THEME TOGGLE -->
-<div class="top-bar">
-  <nav class="fixed-nav">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Tech Stack</a>
-  </nav>
-  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle theme">
-    <i id="theme-icon" class="fa-solid fa-sun"></i>
-  </button>
-</div>
+  <!-- THEME TOGGLE -->
+  <div class="top-bar">
+    <nav class="fixed-nav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle theme">
+      <i id="theme-icon" class="fa-solid fa-sun"></i>
+    </button>
+  </div>
 
-<!-- SOCIAL SIDEBAR -->
+  <!-- SOCIAL SIDEBAR -->
 
 
-<div class="layout">
+  <div class="layout">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <img src="assets/images/profile-photo.png" alt="Anton Averianov">
-    <div class="sidebar-text">
-    <h1>Anton Averianov</h1>
-    <p class="role">Software Engineer</p>
-    </div>
-    <p class="bio">I don't write code.<br>I make things move.</p>
-
-    <div class="sidebar-social">
-      <a href="https://github.com/avedevios" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/ake11a/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-      <a href="https://t.me/gho5tw0lf" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-      <a href="mailto:17ave11a@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-      <div class="sidebar-social-line"></div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <h2>About Me</h2>
-      <div id="about-content">
-        <p style="color:#aaa;font-size:0.9rem">Loading...</p>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <img src="assets/images/profile-photo.png" alt="Anton Averianov">
+      <div class="sidebar-text">
+        <h1>Anton Averianov</h1>
+        <p class="role">Software Engineer</p>
       </div>
-    </section>
+      <p class="bio">Turning complex problems into seamless experiences.</p>
 
-
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <h2>Projects</h2>
-      <div class="project-list">
-
-        <div class="project-entry" id="project-jobsynck">
-          <div class="theme-appearance">
-            <div class="project-screenshots appearance-shots--day">
-              <img src="assets/images/jobsynck/jobsynck-light-1.png" alt="JobSyncK light appearance">
-            </div>
-            <div class="project-screenshots appearance-shots--night">
-              <img src="assets/images/jobsynck/jobsynck-dark-1.png" alt="JobSyncK dark appearance">
-            </div>
-          </div>
-          <h3>JobSyncK</h3>
-          <div class="project-tags">
-            <span>JavaScript</span><span>Safari Extension</span><span>Node.js</span><span>SQLite</span><span>Express</span>
-          </div>
-          <p class="project-summary" id="desc-jobsynck">Loading...</p>
-          <div class="project-readme" id="readme-jobsynck"></div>
-          <a href="https://github.com/avedevios/JobSyncK" target="_blank">GitHub →</a>
+      <div class="sidebar-skills">
+        <h3>Tech Stack</h3>
+        <div class="sidebar-skills-grid">
+          <span>Swift</span>
+          <span>SwiftUI</span>
+          <span>UIKit</span>
+          <span>Objective-C</span>
+          <span>Combine</span>
+          <span>async / await</span>
+          <span>MVVM</span>
+          <span>MVC</span>
+          <span>URLSession</span>
+          <span>REST APIs</span>
+          <span>Keycloak / OIDC</span>
+          <span>SnapKit</span>
+          <span>RealmSwift</span>
+          <span>LocalAuthentication</span>
+          <span>Keychain</span>
+          <span>UserDefaults</span>
+          <span>Swift Testing</span>
+          <span>XCTest</span>
+          <span>JavaScript</span>
+          <span>Safari Web Extensions</span>
+          <span>Node.js</span>
+          <span>Express</span>
+          <span>SQLite (sql.js)</span>
+          <span>Docker</span>
+          <span>Vitest</span>
+          <span>Git / GitHub</span>
+          <span>CI/CD</span>
+          <span>Xcode</span>
+          <span>TestFlight</span>
+          <span>App Store Connect</span>
         </div>
-
-        <div class="project-entry" id="project-lewens">
-          <div class="theme-appearance">
-            <div class="project-screenshots appearance-shots--day">
-              <img src="assets/images/lewens/lewens-light-1.png" alt="lewens light appearance 1">
-              <img src="assets/images/lewens/lewens-light-2.png" alt="lewens light appearance 2">
-              <img src="assets/images/lewens/lewens-light-3.png" alt="lewens light appearance 3">
-            </div>
-            <div class="project-screenshots appearance-shots--night">
-              <img src="assets/images/lewens/lewens-dark-1.png" alt="lewens dark appearance 1">
-              <img src="assets/images/lewens/lewens-dark-2.png" alt="lewens dark appearance 2">
-              <img src="assets/images/lewens/lewens-dark-3.png" alt="lewens dark appearance 3">
-            </div>
-          </div>
-          <h3>lewens</h3>
-          <div class="project-tags">
-            <span>Product</span>
-          </div>
-          <p class="project-summary" id="desc-lewens">Loading...</p>
-          <div class="project-readme" id="readme-lewens"></div>
-          <a href="https://github.com/avedevios/lewens" target="_blank">GitHub →</a>
-        </div>
-
-        <div class="project-entry" id="project-calculnator">
-          <div class="project-screenshots">
-            <img src="assets/images/calculnator/calculnator-1.png" alt="calcuNator preview">
-          </div>
-          <h3>calcuNator</h3>
-          <div class="project-tags">
-            <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
-          </div>
-          <p class="project-summary" id="desc-calculnator">Loading...</p>
-          <div class="project-readme" id="readme-calculnator"></div>
-          <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
-        </div>
-
-        <div class="project-entry" id="project-memopair">
-          <div class="theme-appearance">
-            <div class="project-screenshots appearance-shots--day">
-              <img src="assets/images/memopair/memopair-light-1.png" alt="MemoPair light appearance 1">
-              <img src="assets/images/memopair/memopair-light-2.png" alt="MemoPair light appearance 2">
-            </div>
-            <div class="project-screenshots appearance-shots--night">
-              <img src="assets/images/memopair/memopair-dark-1.png" alt="MemoPair dark appearance 1">
-              <img src="assets/images/memopair/memopair-dark-2.png" alt="MemoPair dark appearance 2">
-            </div>
-          </div>
-          <h3>MemoPair</h3>
-          <div class="project-tags">
-            <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
-          </div>
-          <p class="project-summary" id="desc-memopair">Loading...</p>
-          <div class="project-readme" id="readme-memopair"></div>
-          <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
-        </div>
-
-        <div class="project-entry" id="project-hopspot">
-          <div class="theme-appearance">
-            <div class="project-screenshots appearance-shots--day">
-              <img src="assets/images/hopspot/hopspot-light-1.png" alt="HopSpot light appearance 1">
-              <img src="assets/images/hopspot/hopspot-light-2.png" alt="HopSpot light appearance 2">
-              <img src="assets/images/hopspot/hopspot-light-3.png" alt="HopSpot light appearance 3">
-            </div>
-            <div class="project-screenshots appearance-shots--night">
-              <img src="assets/images/hopspot/hopspot-dark-1.png" alt="HopSpot dark appearance 1">
-              <img src="assets/images/hopspot/hopspot-dark-2.png" alt="HopSpot dark appearance 2">
-              <img src="assets/images/hopspot/hopspot-dark-3.png" alt="HopSpot dark appearance 3">
-            </div>
-          </div>
-          <h3>HopSpot</h3>
-          <div class="project-tags">
-            <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
-          </div>
-          <p class="project-summary" id="desc-hopspot">Loading...</p>
-          <div class="project-readme" id="readme-hopspot"></div>
-          <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
-        </div>
-
       </div>
-    </section>
 
-    <!-- SKILLS -->
-    <section class="section" id="skills">
-      <h2>Tech Stack</h2>
-      <div class="skills-grid">
-        <span>Swift</span>
-        <span>Objective-C</span>
-        <span>UIKit</span>
-        <span>SwiftUI</span>
-        <span>RealmSwift</span>
-        <span>Core Data</span>
-        <span>URLSession</span>
-        <span>REST APIs</span>
-        <span>SnapKit</span>
-        <span>MVVM</span>
-        <span>MVC</span>
-        <span>Git / GitHub</span>
-        <span>CI/CD</span>
-        <span>Xcode</span>
-        <span>TestFlight</span>
-        <span>App Store Connect</span>
+      <div class="sidebar-social">
+        <a href="https://github.com/avedevios" target="_blank" aria-label="GitHub"><i
+            class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ake11a/" target="_blank" aria-label="LinkedIn"><i
+            class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://t.me/gho5tw0lf" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="mailto:17ave11a@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <div class="sidebar-social-line"></div>
       </div>
-    </section>
+    </aside>
 
-  </main>
-</div>
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ABOUT -->
+      <section class="section" id="about">
+        <h2>About Me</h2>
+        <div id="about-content">
+          <p style="color:#aaa;font-size:0.9rem">Loading...</p>
+        </div>
+      </section>
+
+
+      <!-- PROJECTS -->
+      <section class="section" id="projects">
+        <h2>Projects</h2>
+        <div class="project-list">
+
+          <div class="project-entry" id="project-jobsynck">
+            <div class="theme-appearance">
+              <div class="project-screenshots appearance-shots--day">
+                <img src="assets/images/jobsynck/jobsynck-light-1.png" alt="JobSyncK light appearance">
+              </div>
+              <div class="project-screenshots appearance-shots--night">
+                <img src="assets/images/jobsynck/jobsynck-dark-1.png" alt="JobSyncK dark appearance">
+              </div>
+            </div>
+            <h3>JobSyncK</h3>
+            <div class="project-tags">
+              <span>JavaScript</span><span>Safari
+                Extension</span><span>Node.js</span><span>SQLite</span><span>Express</span>
+            </div>
+            <p class="project-summary" id="desc-jobsynck">Loading...</p>
+            <div class="project-readme" id="readme-jobsynck"></div>
+            <a href="https://github.com/avedevios/JobSyncK" target="_blank">GitHub →</a>
+          </div>
+
+          <div class="project-entry" id="project-lewens">
+            <div class="theme-appearance">
+              <div class="project-screenshots appearance-shots--day">
+                <img src="assets/images/lewens/lewens-light-1.png" alt="lewens light appearance 1">
+                <img src="assets/images/lewens/lewens-light-2.png" alt="lewens light appearance 2">
+                <img src="assets/images/lewens/lewens-light-3.png" alt="lewens light appearance 3">
+              </div>
+              <div class="project-screenshots appearance-shots--night">
+                <img src="assets/images/lewens/lewens-dark-1.png" alt="lewens dark appearance 1">
+                <img src="assets/images/lewens/lewens-dark-2.png" alt="lewens dark appearance 2">
+                <img src="assets/images/lewens/lewens-dark-3.png" alt="lewens dark appearance 3">
+              </div>
+            </div>
+            <h3>lewens</h3>
+            <div class="project-tags">
+              <span>Product</span>
+            </div>
+            <p class="project-summary" id="desc-lewens">Loading...</p>
+            <div class="project-readme" id="readme-lewens"></div>
+            <a href="https://github.com/avedevios/lewens" target="_blank">GitHub →</a>
+          </div>
+
+          <div class="project-entry" id="project-calculnator">
+            <div class="project-screenshots">
+              <img src="assets/images/calculnator/calculnator-1.png" alt="calcuNator preview">
+            </div>
+            <h3>calcuNator</h3>
+            <div class="project-tags">
+              <span>Swift</span><span>SwiftUI</span><span>Obj-C</span><span>MVVM</span>
+            </div>
+            <p class="project-summary" id="desc-calculnator">Loading...</p>
+            <div class="project-readme" id="readme-calculnator"></div>
+            <a href="https://github.com/avedevios/calcuNator" target="_blank">GitHub →</a>
+          </div>
+
+          <div class="project-entry" id="project-memopair">
+            <div class="theme-appearance">
+              <div class="project-screenshots appearance-shots--day">
+                <img src="assets/images/memopair/memopair-light-1.png" alt="MemoPair light appearance 1">
+                <img src="assets/images/memopair/memopair-light-2.png" alt="MemoPair light appearance 2">
+              </div>
+              <div class="project-screenshots appearance-shots--night">
+                <img src="assets/images/memopair/memopair-dark-1.png" alt="MemoPair dark appearance 1">
+                <img src="assets/images/memopair/memopair-dark-2.png" alt="MemoPair dark appearance 2">
+              </div>
+            </div>
+            <h3>MemoPair</h3>
+            <div class="project-tags">
+              <span>Swift</span><span>SwiftUI</span><span>iPad</span><span>Face ID</span>
+            </div>
+            <p class="project-summary" id="desc-memopair">Loading...</p>
+            <div class="project-readme" id="readme-memopair"></div>
+            <a href="https://github.com/avedevios/MemoPair" target="_blank">GitHub →</a>
+          </div>
+
+          <div class="project-entry" id="project-hopspot">
+            <div class="theme-appearance">
+              <div class="project-screenshots appearance-shots--day">
+                <img src="assets/images/hopspot/hopspot-light-1.png" alt="HopSpot light appearance 1">
+                <img src="assets/images/hopspot/hopspot-light-2.png" alt="HopSpot light appearance 2">
+                <img src="assets/images/hopspot/hopspot-light-3.png" alt="HopSpot light appearance 3">
+              </div>
+              <div class="project-screenshots appearance-shots--night">
+                <img src="assets/images/hopspot/hopspot-dark-1.png" alt="HopSpot dark appearance 1">
+                <img src="assets/images/hopspot/hopspot-dark-2.png" alt="HopSpot dark appearance 2">
+                <img src="assets/images/hopspot/hopspot-dark-3.png" alt="HopSpot dark appearance 3">
+              </div>
+            </div>
+            <h3>HopSpot</h3>
+            <div class="project-tags">
+              <span>Swift</span><span>UIKit</span><span>SnapKit</span><span>Realm</span>
+            </div>
+            <p class="project-summary" id="desc-hopspot">Loading...</p>
+            <div class="project-readme" id="readme-hopspot"></div>
+            <a href="https://github.com/avedevios/HopSpot" target="_blank">GitHub →</a>
+          </div>
+
+        </div>
+      </section>
+
+      </section>
+
+    </main>
+  </div>
 
 </body>
+
 </html>
 
 <script>
   // загружаем проекты
   const projects = [
-    { id: 'jobsynck',    repo: 'JobSyncK'   },
-    { id: 'lewens',      repo: 'lewens'     },
+    { id: 'jobsynck', repo: 'JobSyncK' },
+    { id: 'lewens', repo: 'lewens' },
     { id: 'calculnator', repo: 'calcuNator' },
-    { id: 'memopair',    repo: 'MemoPair'   },
-    { id: 'hopspot',     repo: 'HopSpot'    },
+    { id: 'memopair', repo: 'MemoPair' },
+    { id: 'hopspot', repo: 'HopSpot' },
   ];
 
   projects.forEach(({ id, repo }) => {
@@ -1334,4 +1746,5 @@
   }
 </script>
 </body>
+
 </html>
