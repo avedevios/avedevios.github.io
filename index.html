@@ -847,6 +847,17 @@
     body.dark .project-screenshots img { border-color: var(--border); }
     body:not(.dark)[class*="lt-"] .project-screenshots img { border-color: var(--l-border); }
 
+    /* Lewens: light vs dark appearance screenshots match site theme */
+    .lewens-appearance .lewens-shots--night {
+      display: none;
+    }
+    body.dark .lewens-appearance .lewens-shots--day {
+      display: none;
+    }
+    body.dark .lewens-appearance .lewens-shots--night {
+      display: grid;
+    }
+
     /* ── SKILLS ── */
     .skills-grid {
       display: flex;
@@ -1044,7 +1055,18 @@
         </div>
 
         <div class="project-entry" id="project-lewens">
-          <div class="project-thumb">🧠</div>
+          <div class="lewens-appearance">
+            <div class="project-screenshots lewens-shots--day">
+              <img src="assets/images/lewens/lewens-light-1.png" alt="lewens light appearance 1">
+              <img src="assets/images/lewens/lewens-light-2.png" alt="lewens light appearance 2">
+              <img src="assets/images/lewens/lewens-light-3.png" alt="lewens light appearance 3">
+            </div>
+            <div class="project-screenshots lewens-shots--night">
+              <img src="assets/images/lewens/lewens-dark-1.png" alt="lewens dark appearance 1">
+              <img src="assets/images/lewens/lewens-dark-2.png" alt="lewens dark appearance 2">
+              <img src="assets/images/lewens/lewens-dark-3.png" alt="lewens dark appearance 3">
+            </div>
+          </div>
           <h3>lewens</h3>
           <div class="project-tags">
             <span>Product</span>
