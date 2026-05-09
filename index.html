@@ -847,15 +847,18 @@
     body.dark .project-screenshots img { border-color: var(--border); }
     body:not(.dark)[class*="lt-"] .project-screenshots img { border-color: var(--l-border); }
 
-    /* Lewens: light vs dark appearance screenshots match site theme */
-    .lewens-appearance .lewens-shots--night {
+    /* Theme-aware screenshots (site light/dark toggle) */
+    .theme-appearance .appearance-shots--night {
       display: none;
     }
-    body.dark .lewens-appearance .lewens-shots--day {
+    body.dark .theme-appearance .appearance-shots--day {
       display: none;
     }
-    body.dark .lewens-appearance .lewens-shots--night {
+    body.dark .theme-appearance .appearance-shots--night {
       display: grid;
+    }
+    .theme-appearance .project-screenshots:not(:has(img:nth-child(2))) {
+      grid-template-columns: 1fr;
     }
 
     /* ── SKILLS ── */
@@ -1044,7 +1047,14 @@
       <div class="project-list">
 
         <div class="project-entry" id="project-jobsynck">
-          <div class="project-thumb">🔍</div>
+          <div class="theme-appearance">
+            <div class="project-screenshots appearance-shots--day">
+              <img src="assets/images/jobsynck/jobsynck-light-1.png" alt="JobSyncK light appearance">
+            </div>
+            <div class="project-screenshots appearance-shots--night">
+              <img src="assets/images/jobsynck/jobsynck-dark-1.png" alt="JobSyncK dark appearance">
+            </div>
+          </div>
           <h3>JobSyncK</h3>
           <div class="project-tags">
             <span>JavaScript</span><span>Safari Extension</span><span>Node.js</span><span>SQLite</span><span>Express</span>
@@ -1055,13 +1065,13 @@
         </div>
 
         <div class="project-entry" id="project-lewens">
-          <div class="lewens-appearance">
-            <div class="project-screenshots lewens-shots--day">
+          <div class="theme-appearance">
+            <div class="project-screenshots appearance-shots--day">
               <img src="assets/images/lewens/lewens-light-1.png" alt="lewens light appearance 1">
               <img src="assets/images/lewens/lewens-light-2.png" alt="lewens light appearance 2">
               <img src="assets/images/lewens/lewens-light-3.png" alt="lewens light appearance 3">
             </div>
-            <div class="project-screenshots lewens-shots--night">
+            <div class="project-screenshots appearance-shots--night">
               <img src="assets/images/lewens/lewens-dark-1.png" alt="lewens dark appearance 1">
               <img src="assets/images/lewens/lewens-dark-2.png" alt="lewens dark appearance 2">
               <img src="assets/images/lewens/lewens-dark-3.png" alt="lewens dark appearance 3">
@@ -1090,9 +1100,15 @@
         </div>
 
         <div class="project-entry" id="project-memopair">
-          <div class="project-screenshots">
-            <img src="assets/images/memopair/memopair-1.png" alt="MemoPair screen 1">
-            <img src="assets/images/memopair/memopair-2.png" alt="MemoPair screen 2">
+          <div class="theme-appearance">
+            <div class="project-screenshots appearance-shots--day">
+              <img src="assets/images/memopair/memopair-light-1.png" alt="MemoPair light appearance 1">
+              <img src="assets/images/memopair/memopair-light-2.png" alt="MemoPair light appearance 2">
+            </div>
+            <div class="project-screenshots appearance-shots--night">
+              <img src="assets/images/memopair/memopair-dark-1.png" alt="MemoPair dark appearance 1">
+              <img src="assets/images/memopair/memopair-dark-2.png" alt="MemoPair dark appearance 2">
+            </div>
           </div>
           <h3>MemoPair</h3>
           <div class="project-tags">
@@ -1104,10 +1120,17 @@
         </div>
 
         <div class="project-entry" id="project-hopspot">
-          <div class="project-screenshots">
-            <img src="assets/images/hopspot/hopspot-1.png" alt="HopSpot screen 1">
-            <img src="assets/images/hopspot/hopspot-2.png" alt="HopSpot screen 2">
-            <img src="assets/images/hopspot/hopspot-3.png" alt="HopSpot screen 3">
+          <div class="theme-appearance">
+            <div class="project-screenshots appearance-shots--day">
+              <img src="assets/images/hopspot/hopspot-light-1.png" alt="HopSpot light appearance 1">
+              <img src="assets/images/hopspot/hopspot-light-2.png" alt="HopSpot light appearance 2">
+              <img src="assets/images/hopspot/hopspot-light-3.png" alt="HopSpot light appearance 3">
+            </div>
+            <div class="project-screenshots appearance-shots--night">
+              <img src="assets/images/hopspot/hopspot-dark-1.png" alt="HopSpot dark appearance 1">
+              <img src="assets/images/hopspot/hopspot-dark-2.png" alt="HopSpot dark appearance 2">
+              <img src="assets/images/hopspot/hopspot-dark-3.png" alt="HopSpot dark appearance 3">
+            </div>
           </div>
           <h3>HopSpot</h3>
           <div class="project-tags">
